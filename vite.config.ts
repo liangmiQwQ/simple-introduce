@@ -5,7 +5,11 @@ import { VineVitePlugin } from 'vue-vine/vite'
 
 export default defineConfig({
   plugins: [
-    VineVitePlugin(),
+    VineVitePlugin({
+      vueCompilerOptions: {
+        __enableTransformBareAttrAsBool: false,
+      },
+    }),
     UnoCSS(),
   ],
   resolve: {
