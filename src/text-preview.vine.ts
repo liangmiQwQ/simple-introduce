@@ -1,6 +1,6 @@
 import type { Settings } from './types/settings'
 import { motion } from 'motion-v'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 export function Preview({ texts, settings }: {
   texts: string[]
@@ -20,17 +20,23 @@ export function Preview({ texts, settings }: {
   })
 
   // const text = computed(() => texts[line.value % texts.length])
-  const fontSize = `${settings.fontSize}px`
+  const fontSize = computed(() => `${settings.fontSize}px`)
 
   return vine`
     <div select-none cursor-default w-full h-50>
-      <FadePreview v-if="settings.type === 'fade'" :texts :line :settings :style="{ fontSize }" />
+      <FadePreview
+        v-if="settings.type === 'fade'"
+        :texts
+        :line
+        :settings
+        :style="{ fontSize, color: settings.textColor }"
+      />
       <BlurPreview
         v-else-if="settings.type === 'blur'"
         :texts
         :line
         :settings
-        :style="{ fontSize }"
+        :style="{ fontSize, color: settings.textColor }"
       />
     </div>
   `
