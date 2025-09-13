@@ -1,6 +1,6 @@
 import type { Settings } from './types/settings'
 import { motion } from 'motion-v'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onUnmounted, ref, watchEffect } from 'vue'
 
 export function Preview({ texts, settings }: {
   texts: string[]
@@ -9,35 +9,24 @@ export function Preview({ texts, settings }: {
   const line = ref(0)
   let interval: ReturnType<typeof setInterval>
 
-  onMounted(() => {
+  onUnmounted(() => {
+    clearInterval(interval)
+  })
+
+  watchEffect(() => {
+    clearInterval(interval)
     interval = setInterval(() => {
       line.value++
     }, settings.during)
-  })
-
-  onUnmounted(() => {
-    clearInterval(interval)
   })
 
   // const text = computed(() => texts[line.value % texts.length])
   const fontSize = computed(() => `${settings.fontSize}px`)
 
   return vine`
-    <div select-none cursor-default w-full h-50>
-      <FadePreview
-        v-if="settings.type === 'fade'"
-        :texts
-        :line
-        :settings
-        :style="{ fontSize, color: settings.textColor }"
-      />
-      <BlurPreview
-        v-else-if="settings.type === 'blur'"
-        :texts
-        :line
-        :settings
-        :style="{ fontSize, color: settings.textColor }"
-      />
+    <div select-none cursor-default w-full h-50 :style="{ fontSize }">
+      <FadePreview v-if="settings.type === 'fade'" :texts :line :settings />
+      <BlurPreview v-else-if="settings.type === 'blur'" :texts :line :settings />
     </div>
   `
 }
