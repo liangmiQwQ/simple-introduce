@@ -15,6 +15,8 @@
     "only-build": "vite build"
   },
   "dependencies": {
+    "@vueuse/core": "^13.9.0",
+    "motion-v": "^1.7.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
