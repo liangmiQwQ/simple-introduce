@@ -8,7 +8,7 @@ export function App() {
   const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
 
   return vine`
-    <main w-full p-20 flex="~ items-center col gap-3">
+    <main w-full class="p-6 md:p-15 lg:p-20" flex="~ items-center col gap-3">
       <h1>Simple Introduce</h1>
       <AppSettings :settings="settings" />
       <Preview :texts="settings.texts" :settings="settings" />
@@ -29,8 +29,9 @@ function AppSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <div w-full flex="~ wrap gap-5" p-4 border-1>
-      <div flex="~ col gap-2" w-100 border-r-1 pr-5>
+    <div w-full flex="~ gap-5 md:row col" p-4 border-1>
+      <!-- Animation Settings -->
+      <div flex="~ col gap-2" class="w-full md:w-100 lg:w-120 md:border-r-1" pr-5>
         <h3 font-bold>Animation Settings</h3>
 
         <div flex="~ col gap-1">
@@ -60,6 +61,7 @@ function AppSettings({ settings }: { settings: Settings }) {
         </div>
       </div>
 
+      <!-- Content Settings -->
       <div flex="~ col gap-2" flex-1>
         <h3 font-bold>Text Content</h3>
 
@@ -67,7 +69,7 @@ function AppSettings({ settings }: { settings: Settings }) {
           <label>Texts (one per line):</label>
           <textarea
             class="border-1 outline-none resize-none font-mono p-2"
-            h-20
+            h-30
             :value="textsValue"
             @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
             placeholder="Enter texts, one per line"
