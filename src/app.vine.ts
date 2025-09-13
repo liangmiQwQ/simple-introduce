@@ -8,7 +8,12 @@ export function App() {
       <h1>Simple Introduce</h1>
       <Settings />
       <Preview
-        :texts="['👋 Hi There', '🍯 I am Liangmi', '🤔 A Student Developer']"
+        :texts="[
+          '👋 Hi There',
+          '🍯 I am Liangmi',
+          '🤔 A Student Developer',
+          '🛜 Learn More In lmfans.cn',
+        ]"
         :settings="{
           during: 2000,
           type: 'blur',

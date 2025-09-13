@@ -23,7 +23,7 @@ export function Preview({ texts, settings }: {
   const fontSize = `${settings.fontSize}px`
 
   return vine`
-    <div select-none cursor-default w-full>
+    <div select-none cursor-default w-full h-50>
       <FadePreview v-if="settings.type === 'fade'" :texts :line :settings :style="{ fontSize }" />
       <BlurPreview
         v-else-if="settings.type === 'blur'"
@@ -51,7 +51,7 @@ function FadePreview({ texts, line }: { texts: string[], line: number, settings:
 
 function BlurPreview({ texts, line }: { texts: string[], line: number, settings: Settings }) {
   return vine`
-    <div :key="line" relative w-full>
+    <div :key="line" relative w-full h-full>
       <motion.span
         :animate="{ opacity: 0, filter: 'blur(5px)', y: -20, transition: { duration: 1 } }"
         absolute
