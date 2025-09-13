@@ -8,12 +8,7 @@ export function App() {
   const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
 
   return vine`
-    <main
-      w-full
-      p-20
-      flex="~ items-center col gap-3"
-      :style="{ backgroundColor: settings.backgroundColor }"
-    >
+    <main w-full p-20 flex="~ items-center col gap-3">
       <h1>Simple Introduce</h1>
       <AppSettings :settings="settings" />
       <Preview :texts="settings.texts" :settings="settings" />
@@ -34,13 +29,13 @@ function AppSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <div w-full flex="~ wrap gap-5" p-4 border-1 rounded>
-      <div flex="~ col gap-2" w-60>
+    <div w-full flex="~ wrap gap-5" p-4 border-b-1>
+      <div flex="~ col gap-2" w-100 border-r-1 pr-5>
         <h3 font-bold>Animation Settings</h3>
 
         <div flex="~ col gap-1">
           <label>Animation Type:</label>
-          <select v-model="settings.type" border-1 p-1 rounded>
+          <select v-model="settings.type" border-1 p-1>
             <option value="blur">Blur</option>
             <option value="fade">Fade</option>
           </select>
@@ -56,42 +51,12 @@ function AppSettings({ settings }: { settings: Settings }) {
             step="100"
             border-1
             p-1
-            rounded
           />
         </div>
 
         <div flex="~ col gap-1">
           <label>Font Size:</label>
-          <input
-            type="number"
-            v-model="settings.fontSize"
-            min="12"
-            max="120"
-            step="2"
-            border-1
-            p-1
-            rounded
-          />
-        </div>
-      </div>
-
-      <div flex="~ col gap-2" w-60>
-        <h3 font-bold>Color Settings</h3>
-
-        <div flex="~ col gap-1">
-          <label>Text Color:</label>
-          <div flex="~ items-center gap-2">
-            <input type="color" v-model="settings.textColor" />
-            <span>{{ settings.textColor }}</span>
-          </div>
-        </div>
-
-        <div flex="~ col gap-1">
-          <label>Background Color:</label>
-          <div flex="~ items-center gap-2">
-            <input type="color" v-model="settings.backgroundColor" />
-            <span>{{ settings.backgroundColor }}</span>
-          </div>
+          <input type="number" v-model="settings.fontSize" min="12" max="120" step="2" border-1 p-1 />
         </div>
       </div>
 
@@ -109,7 +74,7 @@ function AppSettings({ settings }: { settings: Settings }) {
           />
         </div>
 
-        <button @click="resetSettings" border-1 p-2 rounded bg-gray-100 hover:bg-gray-200>
+        <button @click="resetSettings" border-1 p-2 bg-gray-100 hover:bg-gray-200>
           Reset to Default
         </button>
       </div>
