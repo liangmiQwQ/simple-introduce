@@ -1,32 +1,75 @@
+import type { Settings } from './types/settings'
+import { motion } from 'motion-v'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-export function Preview({ text, type }: {
-  text: string[]
-  type: 'magic'
+export function Preview({ texts, settings }: {
+  texts: string[]
+  settings: Settings
 }) {
-  return vine`
-    <MagicPreview v-if="type === 'magic'" :text />
-  `
-}
-
-function MagicPreview({ text }: { text: string[] }) {
-  const index = ref(0)
-
+  const line = ref(0)
   let interval: ReturnType<typeof setInterval>
 
   onMounted(() => {
     interval = setInterval(() => {
-      index.value++
-    }, 1000)
+      line.value++
+    }, settings.during)
   })
 
   onUnmounted(() => {
     clearInterval(interval)
   })
 
+  // const text = computed(() => texts[line.value % texts.length])
+  const fontSize = `${settings.fontSize}px`
+
   return vine`
-    <div>
-      {{ text[index % text.length] }}
+    <div select-none cursor-default w-full>
+      <FadePreview v-if="settings.type === 'fade'" :texts :line :settings :style="{ fontSize }" />
+      <BlurPreview
+        v-else-if="settings.type === 'blur'"
+        :texts
+        :line
+        :settings
+        :style="{ fontSize }"
+      />
+    </div>
+  `
+}
+
+function FadePreview({ texts, line }: { texts: string[], line: number, settings: Settings }) {
+  return vine`
+    <div :key="line" relative w-full>
+      <motion.span :animate="{ opacity: 0 }" absolute>
+        {{ texts[(line - 1) % texts.length] }}
+      </motion.span>
+      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" absolute>
+        {{ texts[line % texts.length] }}
+      </motion.span>
+    </div>
+  `
+}
+
+function BlurPreview({ texts, line }: { texts: string[], line: number, settings: Settings }) {
+  return vine`
+    <div :key="line" relative w-full>
+      <motion.span
+        :animate="{ opacity: 0, filter: 'blur(5px)', y: -20, transition: { duration: 1 } }"
+        absolute
+      >
+        {{ texts[(line - 1) % texts.length] }}
+      </motion.span>
+      <motion.span
+        :initial="{ opacity: 0, filter: 'blur(5px)', y: 20 }"
+        :animate="{
+          opacity: 1,
+          filter: 'blur(0px)',
+          y: 0,
+          transition: { duration: 1 },
+        }"
+        absolute
+      >
+        {{ texts[line % texts.length] }}
+      </motion.span>
     </div>
   `
 }
