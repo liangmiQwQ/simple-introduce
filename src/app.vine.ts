@@ -29,7 +29,7 @@ function AppSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <div w-full flex="~ wrap gap-5" p-4 border-b-1>
+    <div w-full flex="~ wrap gap-5" p-4 border-1>
       <div flex="~ col gap-2" w-100 border-r-1 pr-5>
         <h3 font-bold>Animation Settings</h3>
 
