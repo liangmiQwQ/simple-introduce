@@ -16,8 +16,14 @@ export function App() {
     <main w-full min-h-screen transition-colors duration-300>
       <div class="p-6 md:p-8 lg:p-12" flex="~ col gap-4">
         <!-- Header -->
-        <nav flex="~ justify-between items-center" w-full>
-          <h1 class="text-lg font-medium">Simple Introduce</h1>
+        <nav flex="~ justify-between items-center" w-full px-2>
+          <h1 class="text-lg" flex="~ items-center gap-1" op90>
+            <span font-medium>Simple</span>
+            <span op80>Introduce</span>
+            <a op60 text-base underline href="https://github.com/liangmiqwq" target="_blank"
+              >by LiangMi</a
+            >
+          </h1>
           <div flex="~ items-center gap-1">
             <UiButton @click="() => toggleDarkMode()" title="Toggle dark mode" type="ghost">
               <div v-if="isDark" i-ph-sun-duotone />
