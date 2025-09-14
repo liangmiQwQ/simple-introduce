@@ -1,15 +1,49 @@
 import type { Settings } from './types/settings'
 import { useLocalStorage } from '@vueuse/core'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { DEFAULT_SETTINGS } from './constants/default-settings'
 import { Preview } from './text-preview.vine'
 
 export function App() {
   const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
+  const isDark = ref(false)
+
+  const toggleDarkMode = () => {
+    const current = localStorage.getItem('color-schema') || 'auto'
+    let newMode: string
+
+    if (current === 'dark') {
+      newMode = 'light'
+      isDark.value = false
+    }
+    else {
+      newMode = 'dark'
+      isDark.value = true
+    }
+
+    localStorage.setItem('color-schema', newMode)
+    document.documentElement.classList.toggle('dark', newMode === 'dark')
+  }
+
+  onMounted(() => {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    const setting = localStorage.getItem('color-schema') || 'auto'
+    isDark.value = setting === 'dark' || (prefersDark && setting !== 'light')
+  })
 
   return vine`
     <main w-full class="p-6 md:p-15 lg:p-20" flex="~ items-center col gap-3">
-      <h1>Simple Introduce</h1>
+      <div flex="~ justify-between items-center" w-full>
+        <h1>Simple Introduce</h1>
+        <button
+          @click="toggleDarkMode"
+          class="border-1 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          title="Toggle dark mode"
+        >
+          <span v-if="isDark">Light Mode</span>
+          <span v-else>Dark Mode</span>
+        </button>
+      </div>
       <AppSettings :settings="settings" />
       <Preview :texts="settings.texts" :settings="settings" />
     </main>
