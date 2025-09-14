@@ -1,4 +1,4 @@
-import type { Settings } from './types/settings'
+import type { Settings } from './settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, watchEffect } from 'vue'
 
