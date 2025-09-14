@@ -1,4 +1,4 @@
-import { defineConfig, presetAttributify, presetWind4 } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetWind4 } from 'unocss'
 
 export default defineConfig({
   // You can delete the file when unocss supports this by default
@@ -7,5 +7,7 @@ export default defineConfig({
       include: ['**/*.vine.ts'],
     },
   },
-  presets: [presetAttributify(), presetWind4()],
+  presets: [presetAttributify(), presetWind4(), presetIcons({
+    scale: 1.2,
+  })],
 })
