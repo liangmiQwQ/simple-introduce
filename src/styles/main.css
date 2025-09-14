@@ -1,31 +1,10 @@
-:root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --border-color: #e5e5e5;
-  --hover-bg: #f5f5f5;
-}
-
-.dark {
-  --bg-color: #1a1a1a;
-  --text-color: #e5e5e5;
-  --border-color: #404040;
-  --hover-bg: #2a2a2a;
-}
-
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: white;
+  color: #333333;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.border-1 {
-  border-color: var(--border-color);
-}
-
-.bg-gray-100 {
-  background-color: var(--hover-bg);
-}
-
-.hover\:bg-gray-100:hover {
-  background-color: var(--hover-bg);
+.dark body {
+  background-color: #1a1a1a;
+  color: #e5e5e5;
 }

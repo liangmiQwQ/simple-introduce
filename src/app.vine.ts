@@ -37,7 +37,7 @@ export function App() {
         <h1>Simple Introduce</h1>
         <button
           @click="toggleDarkMode"
-          class="border-1 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+          class="border border-slate-300 dark:border-slate-600 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
           title="Toggle dark mode"
         >
           <span v-if="isDark">Light Mode</span>
@@ -63,14 +63,18 @@ function AppSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <div w-full flex="~ gap-5 md:row col" p-4 border-1>
+    <div w-full flex="~ gap-5 md:row col" p-4 border border-slate-300 dark:border-slate-600 rounded>
       <!-- Animation Settings -->
-      <div flex="~ col gap-2" class="w-full md:w-100 lg:w-120 md:border-r-1" pr-5>
+      <div
+        flex="~ col gap-2"
+        class="w-full md:w-100 lg:w-120 md:border-r border-slate-300 dark:border-slate-600"
+        pr-5
+      >
         <h3 font-bold>Animation Settings</h3>
 
         <div flex="~ col gap-1">
           <label>Animation Type:</label>
-          <select v-model="settings.type" border-1 p-1>
+          <select v-model="settings.type" border border-slate-300 dark:border-slate-600 p-1 rounded>
             <option value="blur">Blur</option>
             <option value="fade">Fade</option>
           </select>
@@ -84,14 +88,28 @@ function AppSettings({ settings }: { settings: Settings }) {
             min="500"
             max="10000"
             step="100"
-            border-1
+            border
+            border-slate-300
+            dark:border-slate-600
             p-1
+            rounded
           />
         </div>
 
         <div flex="~ col gap-1">
           <label>Font Size:</label>
-          <input type="number" v-model="settings.fontSize" min="12" max="120" step="2" border-1 p-1 />
+          <input
+            type="number"
+            v-model="settings.fontSize"
+            min="12"
+            max="120"
+            step="2"
+            border
+            border-slate-300
+            dark:border-slate-600
+            p-1
+            rounded
+          />
         </div>
       </div>
 
@@ -102,7 +120,7 @@ function AppSettings({ settings }: { settings: Settings }) {
         <div flex="~ col gap-1">
           <label>Texts (one per line):</label>
           <textarea
-            class="border-1 outline-none resize-none font-mono p-2"
+            class="border border-slate-300 dark:border-slate-600 outline-none resize-none font-mono p-2 rounded"
             h-30
             :value="textsValue"
             @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
@@ -110,7 +128,18 @@ function AppSettings({ settings }: { settings: Settings }) {
           />
         </div>
 
-        <button @click="resetSettings" border-1 p-2 bg-gray-100 hover:bg-gray-200>
+        <button
+          @click="resetSettings"
+          border
+          border-slate-300
+          dark:border-slate-600
+          p-2
+          bg-slate-100
+          dark:bg-slate-800
+          hover:bg-slate-200
+          dark:hover:bg-slate-700
+          rounded
+        >
           Reset to Default
         </button>
       </div>
