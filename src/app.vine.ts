@@ -32,20 +32,36 @@ export function App() {
   })
 
   return vine`
-    <main w-full class="p-6 md:p-15 lg:p-20" flex="~ items-center col gap-3">
-      <div flex="~ justify-between items-center" w-full>
-        <h1>Simple Introduce</h1>
-        <button
-          @click="toggleDarkMode"
-          class="border border-slate-300 dark:border-slate-600 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
-          title="Toggle dark mode"
-        >
-          <span v-if="isDark">Light Mode</span>
-          <span v-else>Dark Mode</span>
-        </button>
+    <main w-full min-h-screen bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300>
+      <div class="p-6 md:p-8 lg:p-12" flex="~ col gap-6">
+        <!-- Header -->
+        <div flex="~ justify-between items-center" w-full>
+          <h1 class="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+            Simple Introduce
+          </h1>
+          <button
+            @click="toggleDarkMode"
+            class="border border-neutral-300 dark:border-neutral-600 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+            title="Toggle dark mode"
+          >
+            <span v-if="isDark" class="text-neutral-700 dark:text-neutral-300">Light Mode</span>
+            <span v-else class="text-neutral-700 dark:text-neutral-300">Dark Mode</span>
+          </button>
+        </div>
+
+        <!-- Content Area -->
+        <div flex="~ col lg:row gap-6" w-full>
+          <!-- Settings Panel -->
+          <div class="w-full lg:w-96">
+            <AppSettings :settings="settings" />
+          </div>
+
+          <!-- Preview Area -->
+          <div class="flex-1 min-h-96">
+            <Preview :texts="settings.texts" :settings="settings" />
+          </div>
+        </div>
       </div>
-      <AppSettings :settings="settings" />
-      <Preview :texts="settings.texts" :settings="settings" />
     </main>
   `
 }
@@ -63,85 +79,91 @@ function AppSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <div w-full flex="~ gap-5 md:row col" p-4 border border-slate-300 dark:border-slate-600 rounded>
-      <!-- Animation Settings -->
-      <div
-        flex="~ col gap-2"
-        class="w-full md:w-100 lg:w-120 md:border-r border-slate-300 dark:border-slate-600"
-        pr-5
-      >
-        <h3 font-bold>Animation Settings</h3>
+    <div
+      w-full
+      bg-white
+      dark:bg-neutral-800
+      border
+      border-neutral-200
+      dark:border-neutral-700
+      rounded-lg
+      shadow-sm
+      p-6
+      transition-colors
+    >
+      <div flex="~ gap-6 md:row col lg:col">
+        <!-- Animation Settings -->
+        <div flex="~ col gap-4" class="w-full md:w-80">
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+            Animation Settings
+          </h3>
 
-        <div flex="~ col gap-1">
-          <label>Animation Type:</label>
-          <select v-model="settings.type" border border-slate-300 dark:border-slate-600 p-1 rounded>
-            <option value="blur">Blur</option>
-            <option value="fade">Fade</option>
-          </select>
+          <div flex="~ col gap-2">
+            <label class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              Animation Type:
+            </label>
+            <select
+              v-model="settings.type"
+              class="border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            >
+              <option value="blur">Blur</option>
+              <option value="fade">Fade</option>
+            </select>
+          </div>
+
+          <div flex="~ col gap-2">
+            <label class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              Duration (ms):
+            </label>
+            <input
+              type="number"
+              v-model="settings.during"
+              min="500"
+              max="10000"
+              step="100"
+              class="border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
+
+          <div flex="~ col gap-2">
+            <label class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              Font Size:
+            </label>
+            <input
+              type="number"
+              v-model="settings.fontSize"
+              min="12"
+              max="120"
+              step="2"
+              class="border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 p-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
         </div>
 
-        <div flex="~ col gap-1">
-          <label>Duration (ms):</label>
-          <input
-            type="number"
-            v-model="settings.during"
-            min="500"
-            max="10000"
-            step="100"
-            border
-            border-slate-300
-            dark:border-slate-600
-            p-1
-            rounded
-          />
+        <!-- Content Settings -->
+        <div flex="~ col gap-4" flex-1>
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">Text Content</h3>
+
+          <div flex="~ col gap-2">
+            <label class="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+              Texts (one per line):
+            </label>
+            <textarea
+              class="border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 outline-none resize-none font-mono p-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              h-32
+              :value="textsValue"
+              @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
+              placeholder="Enter texts, one per line"
+            />
+          </div>
+
+          <button
+            @click="resetSettings"
+            class="border border-neutral-300 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 p-3 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-600 transition-colors font-medium"
+          >
+            Reset to Default
+          </button>
         </div>
-
-        <div flex="~ col gap-1">
-          <label>Font Size:</label>
-          <input
-            type="number"
-            v-model="settings.fontSize"
-            min="12"
-            max="120"
-            step="2"
-            border
-            border-slate-300
-            dark:border-slate-600
-            p-1
-            rounded
-          />
-        </div>
-      </div>
-
-      <!-- Content Settings -->
-      <div flex="~ col gap-2" flex-1>
-        <h3 font-bold>Text Content</h3>
-
-        <div flex="~ col gap-1">
-          <label>Texts (one per line):</label>
-          <textarea
-            class="border border-slate-300 dark:border-slate-600 outline-none resize-none font-mono p-2 rounded"
-            h-30
-            :value="textsValue"
-            @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
-            placeholder="Enter texts, one per line"
-          />
-        </div>
-
-        <button
-          @click="resetSettings"
-          border
-          border-slate-300
-          dark:border-slate-600
-          p-2
-          bg-slate-100
-          dark:bg-slate-800
-          hover:bg-slate-200
-          dark:hover:bg-slate-700
-          rounded
-        >
-          Reset to Default
-        </button>
       </div>
     </div>
   `
