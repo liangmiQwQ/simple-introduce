@@ -1,0 +1,8 @@
+.dark {
+  color-scheme: dark;
+}
+
+html {
+  --at-apply:  font-sans;
+}
+

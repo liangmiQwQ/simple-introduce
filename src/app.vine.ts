@@ -1,38 +1,16 @@
 import type { Settings } from './types/settings'
-import { useLocalStorage } from '@vueuse/core'
-import { computed, onMounted, ref } from 'vue'
+import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
+import { computed } from 'vue'
 import { DEFAULT_SETTINGS } from './constants/default-settings'
 import { Preview } from './text-preview.vine'
 
 export function App() {
   const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
-  const isDark = ref(false)
-
-  const toggleDarkMode = () => {
-    const current = localStorage.getItem('color-schema') || 'auto'
-    let newMode: string
-
-    if (current === 'dark') {
-      newMode = 'light'
-      isDark.value = false
-    }
-    else {
-      newMode = 'dark'
-      isDark.value = true
-    }
-
-    localStorage.setItem('color-schema', newMode)
-    document.documentElement.classList.toggle('dark', newMode === 'dark')
-  }
-
-  onMounted(() => {
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    const setting = localStorage.getItem('color-schema') || 'auto'
-    isDark.value = setting === 'dark' || (prefersDark && setting !== 'light')
-  })
+  const isDark = useDark()
+  const toggleDarkMode = useToggle(isDark)
 
   return vine`
-    <main w-full min-h-screen bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300>
+    <main w-full min-h-screen transition-colors duration-300>
       <div class="p-6 md:p-8 lg:p-12" flex="~ col gap-6">
         <!-- Header -->
         <div flex="~ justify-between items-center" w-full>
@@ -40,7 +18,7 @@ export function App() {
             Simple Introduce
           </h1>
           <button
-            @click="toggleDarkMode"
+            @click="() => toggleDarkMode()"
             class="border border-neutral-300 dark:border-neutral-600 p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
             title="Toggle dark mode"
           >
