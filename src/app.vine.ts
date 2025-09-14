@@ -30,7 +30,7 @@ export function App() {
             >
               <div class="i-mdi-github" />
             </UiButton>
-            <div flex="~ items-center gap-2" select-none>
+            <div flex="~ items-center gap-2" select-none ml-2>
               <div op50>Made with</div>
               <a
                 class="op60 hover:op70"
