@@ -3,9 +3,9 @@ import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
 import { computed } from 'vue'
 import VineLogo from '@/assets/vine-logo.png'
 import { DEFAULT_SETTINGS } from './settings'
-import { Preview } from './text-preview.vine'
 import { CardOption, UiCard } from './ui/card-element.vine'
 import { TextArea, UiButton, UiInput, UiSelect } from './ui/forms.vine'
+import { Preview } from './ui/text-preview.vine'
 
 export function App() {
   const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
