@@ -60,7 +60,7 @@ function FadePreview({ texts, line }: { texts: string[], line: number, settings:
   })
 
   return vine`
-    <div :key="line" relative w-full h-full ref="container-fade">
+    <div :key="line" relative of-clip w-full h-full ref="container-fade">
       <motion.span :animate="{ opacity: 0 }" absolute ref="prev-fade" :style="prevStyle">
         {{ texts[(line - 1) % texts.length] }}
       </motion.span>
@@ -105,7 +105,7 @@ function BlurPreview({ texts, line }: { texts: string[], line: number, settings:
   })
 
   return vine`
-    <div :key="line" relative w-full h-full ref="container-blur">
+    <div :key="line" relative of-clip w-full h-full ref="container-blur">
       <motion.span
         :animate="{
           opacity: 0,
