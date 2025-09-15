@@ -70,7 +70,7 @@ export function App() {
 
 function PanelPreview({ settings }: { settings: Settings }) {
   return vine`
-    <UiCard flex-1 h-fit>
+    <UiCard flex-1 h-fit class="!pt-0">
       <Preview
         h-50
         :texts="settings.texts"

@@ -1,6 +1,7 @@
+import type { StyleValue } from 'vue'
 import type { Settings } from '../settings'
 import { motion } from 'motion-v'
-import { computed, onUnmounted, ref, watchEffect } from 'vue'
+import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
 
 export function Preview({ texts, settings }: {
   texts: string[]
@@ -32,12 +33,44 @@ export function Preview({ texts, settings }: {
 }
 
 function FadePreview({ texts, line }: { texts: string[], line: number, settings: Settings }) {
+  const containerBox = useTemplateRef('container-fade')
+  const prevLine = useTemplateRef('prev-fade')
+  const currentLine = useTemplateRef('current-fade')
+
+  const prevStyle = computed((): StyleValue => {
+    if (containerBox.value && prevLine.value) {
+      return {
+        top:
+          `${(containerBox.value.offsetHeight - (prevLine.value.$el as HTMLSpanElement).offsetHeight) / 2}px`,
+      }
+    }
+
+    return undefined
+  })
+
+  const currentStyle = computed((): StyleValue => {
+    if (containerBox.value && currentLine.value) {
+      return {
+        top:
+          `${(containerBox.value.offsetHeight - (currentLine.value.$el as HTMLSpanElement).offsetHeight) / 2}px`,
+      }
+    }
+
+    return undefined
+  })
+
   return vine`
-    <div :key="line" relative w-full>
-      <motion.span :animate="{ opacity: 0 }" absolute>
+    <div :key="line" relative w-full h-full ref="container-fade">
+      <motion.span :animate="{ opacity: 0 }" absolute ref="prev-fade" :style="prevStyle">
         {{ texts[(line - 1) % texts.length] }}
       </motion.span>
-      <motion.span :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" absolute>
+      <motion.span
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        absolute
+        ref="current-fade"
+        :style="currentStyle"
+      >
         {{ texts[line % texts.length] }}
       </motion.span>
     </div>
@@ -45,11 +78,44 @@ function FadePreview({ texts, line }: { texts: string[], line: number, settings:
 }
 
 function BlurPreview({ texts, line }: { texts: string[], line: number, settings: Settings }) {
+  const containerBox = useTemplateRef('container-blur')
+  const prevLine = useTemplateRef('prev-blur')
+  const currentLine = useTemplateRef('current-blur')
+
+  const prevStyle = computed((): StyleValue => {
+    if (containerBox.value && prevLine.value) {
+      return {
+        top:
+          `${(containerBox.value.offsetHeight - (prevLine.value.$el as HTMLSpanElement).offsetHeight) / 2}px`,
+      }
+    }
+
+    return undefined
+  })
+
+  const currentStyle = computed((): StyleValue => {
+    if (containerBox.value && currentLine.value) {
+      return {
+        top:
+          `${(containerBox.value.offsetHeight - (currentLine.value.$el as HTMLSpanElement).offsetHeight) / 2}px`,
+      }
+    }
+
+    return undefined
+  })
+
   return vine`
-    <div :key="line" relative w-full h-full>
+    <div :key="line" relative w-full h-full ref="container-blur">
       <motion.span
-        :animate="{ opacity: 0, filter: 'blur(5px)', y: -20, transition: { duration: 1 } }"
+        :animate="{
+          opacity: 0,
+          filter: 'blur(5px)',
+          y: -20,
+          transition: { duration: 1 },
+        }"
         absolute
+        :style="prevStyle"
+        ref="prev-blur"
       >
         {{ texts[(line - 1) % texts.length] }}
       </motion.span>
@@ -61,7 +127,9 @@ function BlurPreview({ texts, line }: { texts: string[], line: number, settings:
           y: 0,
           transition: { duration: 1 },
         }"
+        :style="currentStyle"
         absolute
+        ref="current-blur"
       >
         {{ texts[line % texts.length] }}
       </motion.span>
