@@ -1,4 +1,4 @@
-import type { Settings } from './settings'
+import type { Settings } from '../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, watchEffect } from 'vue'
 
@@ -24,7 +24,7 @@ export function Preview({ texts, settings }: {
   const fontSize = computed(() => `${settings.fontSize}px`)
 
   return vine`
-    <div select-none cursor-default w-full h-50 :style="{ fontSize }">
+    <div select-none cursor-default w-full :style="{ fontSize }">
       <FadePreview v-if="settings.type === 'fade'" :texts :line :settings />
       <BlurPreview v-else-if="settings.type === 'blur'" :texts :line :settings />
     </div>

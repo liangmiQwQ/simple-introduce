@@ -57,20 +57,33 @@ export function App() {
         <div flex="~ col lg:row gap-6" w-full>
           <!-- Settings Panel -->
           <div class="w-full lg:w-96">
-            <AppSettings :settings="settings" />
+            <PanelSettings :settings="settings" />
           </div>
 
           <!-- Preview Area -->
-          <div class="flex-1 min-h-96">
-            <Preview :texts="settings.texts" :settings="settings" />
-          </div>
+          <PanelPreview :settings />
         </div>
       </div>
     </main>
   `
 }
 
-function AppSettings({ settings }: { settings: Settings }) {
+function PanelPreview({ settings }: { settings: Settings }) {
+  return vine`
+    <UiCard flex-1 h-fit>
+      <Preview
+        h-50
+        :texts="settings.texts"
+        :settings="settings"
+        border-b
+        border-neutral-200
+        dark:border-neutral-800
+      />
+    </UiCard>
+  `
+}
+
+function PanelSettings({ settings }: { settings: Settings }) {
   const resetSettings = () => {
     Object.assign(settings, DEFAULT_SETTINGS)
   }
