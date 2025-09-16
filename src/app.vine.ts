@@ -1,11 +1,12 @@
 import type { Settings } from './settings'
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
 import VineLogo from '@/assets/vine-logo.png'
 import { DEFAULT_SETTINGS } from './settings'
 import { CardOption, UiCard } from './ui/card-element.vine'
 import { TextArea, UiButton, UiInput, UiSelect } from './ui/forms.vine'
 import { Preview } from './ui/text-preview.vine'
+import { getAspect, getHeight } from './utils'
 
 export function App() {
   const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
@@ -69,16 +70,49 @@ export function App() {
 }
 
 function PanelPreview({ settings }: { settings: Settings }) {
+  const height = ref(0)
+  const previewer = useTemplateRef('card-preview')
+  const width = ref(0)
+
+  function resizeHandle() {
+    if (previewer.value) {
+      width.value = (previewer.value.$el as HTMLDivElement).offsetWidth
+
+      height.value = getHeight(width.value, settings) + 20
+    }
+  }
+
+  onMounted(() => {
+    window.addEventListener('resize', resizeHandle)
+    resizeHandle()
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', resizeHandle)
+  })
+
+  const aspect = computed(() => getAspect(width.value, height.value))
+
   return vine`
-    <UiCard flex-1 h-fit class="!pt-0">
+    <UiCard flex-1 h-fit class="!py-0">
       <Preview
-        h-50
-        :texts="settings.texts"
+        ref="card-preview"
+        :height
         :settings="settings"
         border-b
         border-neutral-200
         dark:border-neutral-800
       />
+      <div p-2 text-sm flex="~ items-center justify-between" w-full>
+        <div flex="~ items-center gap-1">
+          <span op50>Size</span>
+          <span op80>{{ width }} * {{ height }}</span>
+        </div>
+        <div flex="~ items-center gap-1">
+          <span op50>Aspect</span>
+          <span op80>{{ aspect[0] }} : {{ aspect[1] }}</span>
+        </div>
+      </div>
     </UiCard>
   `
 }

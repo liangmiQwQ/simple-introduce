@@ -3,9 +3,9 @@ import type { Settings } from '../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
 
-export function Preview({ texts, settings }: {
-  texts: string[]
+export function Preview({ settings, height }: {
   settings: Settings
+  height?: number
 }) {
   const line = ref(0)
   let interval: ReturnType<typeof setInterval>
@@ -21,13 +21,15 @@ export function Preview({ texts, settings }: {
     }, settings.during)
   })
 
-  // const text = computed(() => texts[line.value % texts.length])
-  const fontSize = computed(() => `${settings.fontSize}px`)
+  const style = computed(() => ({
+    fontSize: `${settings.fontSize}px`,
+    height: `${height}px`,
+  }))
 
   return vine`
-    <div select-none cursor-default w-full :style="{ fontSize }">
-      <FadePreview v-if="settings.type === 'fade'" :texts :line :settings />
-      <BlurPreview v-else-if="settings.type === 'blur'" :texts :line :settings />
+    <div select-none cursor-default w-full :style>
+      <FadePreview v-if="settings.type === 'fade'" :texts="settings.texts" :line :settings />
+      <BlurPreview v-else-if="settings.type === 'blur'" :texts="settings.texts" :line :settings />
     </div>
   `
 }
