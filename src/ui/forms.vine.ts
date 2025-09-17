@@ -64,11 +64,12 @@ export function TextArea({ modelValue }: { modelValue?: any }) {
 }
 
 export function UiButton() {
-  const type = vineProp.withDefault<'default' | 'destructive' | 'ghost'>('default')
+  const type = vineProp.withDefault<'default' | 'destructive' | 'secondary' | 'ghost'>('default')
   const href = vineProp.withDefault('')
 
   const typeClassMap: Record<typeof type.value, string> = {
     default: 'border border-neutral-300 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900',
+    secondary: 'bg-neutral-300 dark:bg-neutral-800 hover:bg-neutral-400 dark:hover:bg-neutral-700',
     destructive: 'border border-red-400 dark:border-none dark:bg-red-950 hover:bg-red-100 dark:hover:bg-red-900',
     ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-900',
   }

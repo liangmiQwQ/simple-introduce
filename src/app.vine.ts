@@ -99,19 +99,22 @@ function PanelPreview() {
   const aspect = computed(() => getAspect(width.value, height.value))
 
   return vine`
-    <UiCard flex-1 h-fit class="!py-0">
-      <Preview ref="card-preview" :height :settings="settings" />
-      <div p-2 text-sm flex="~ items-center gap-4 justify-center" op60 w-full>
-        <div flex="~ items-center gap-1">
-          <span op50>Size</span>
-          <span op80>{{ width }} * {{ height }}</span>
+    <div flex-1 h-fit flex="~ col gap-2">
+      <UiCard w-full class="!py-0">
+        <Preview ref="card-preview" :height :settings="settings" />
+        <div p-2 text-sm flex="~ items-center gap-4 justify-center" op60 w-full>
+          <div flex="~ items-center gap-1">
+            <span op50>Size</span>
+            <span op80>{{ width }} * {{ height }}</span>
+          </div>
+          <div flex="~ items-center gap-1">
+            <span op50>Aspect</span>
+            <span op80>{{ aspect[0] }} : {{ aspect[1] }}</span>
+          </div>
         </div>
-        <div flex="~ items-center gap-1">
-          <span op50>Aspect</span>
-          <span op80>{{ aspect[0] }} : {{ aspect[1] }}</span>
-        </div>
-      </div>
-    </UiCard>
+      </UiCard>
+      <UiButton type="secondary"> Export as GIF </UiButton>
+    </div>
   `
 }
 

@@ -1,4 +1,4 @@
-import type { Ref, StyleValue } from 'vue'
+import type { StyleValue } from 'vue'
 import type { Settings } from '../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
