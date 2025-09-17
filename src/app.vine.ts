@@ -1,6 +1,6 @@
 import type { Settings } from './settings'
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
-import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import VineLogo from '@/assets/vine-logo.png'
 import { DEFAULT_SETTINGS } from './settings'
 import { CardOption, UiCard } from './ui/card-element.vine'
@@ -69,7 +69,8 @@ export function App() {
   `
 }
 
-function PanelPreview({ settings }: { settings: Settings }) {
+function PanelPreview() {
+  const settings = vineProp<Settings>()
   const height = ref(0)
   const previewer = useTemplateRef('card-preview')
   const width = ref(0)
@@ -78,7 +79,7 @@ function PanelPreview({ settings }: { settings: Settings }) {
     if (previewer.value) {
       width.value = (previewer.value.$el as HTMLDivElement).offsetWidth
 
-      height.value = getHeight(width.value, settings) + 20
+      height.value = getHeight(width.value, settings.value) + 20
     }
   }
 
@@ -91,19 +92,16 @@ function PanelPreview({ settings }: { settings: Settings }) {
     window.removeEventListener('resize', resizeHandle)
   })
 
+  watch(settings.value, () => {
+    resizeHandle()
+  })
+
   const aspect = computed(() => getAspect(width.value, height.value))
 
   return vine`
     <UiCard flex-1 h-fit class="!py-0">
-      <Preview
-        ref="card-preview"
-        :height
-        :settings="settings"
-        border-b
-        border-neutral-200
-        dark:border-neutral-800
-      />
-      <div p-2 text-sm flex="~ items-center justify-between" w-full>
+      <Preview ref="card-preview" :height :settings="settings" />
+      <div p-2 text-sm flex="~ items-center gap-4 justify-center" op60 w-full>
         <div flex="~ items-center gap-1">
           <span op50>Size</span>
           <span op80>{{ width }} * {{ height }}</span>
