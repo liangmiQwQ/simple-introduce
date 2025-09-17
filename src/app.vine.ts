@@ -1,6 +1,6 @@
 import type { Settings } from './settings'
 import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
-import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 import VineLogo from '@/assets/vine-logo.png'
 import { DEFAULT_SETTINGS } from './settings'
 import { CardOption, UiCard } from './ui/card-element.vine'
@@ -133,7 +133,7 @@ function PanelSettings({ settings }: { settings: Settings }) {
         <!-- Animation Settings -->
         <div flex="~ col gap-4" class="w-full md:w-80 lg:w-full">
           <CardOption>
-            <template #label>Animation Type:</template>
+            <template #label>Animation Type</template>
             <UiSelect
               :selects="{
                 fade: 'Fade',
@@ -144,20 +144,32 @@ function PanelSettings({ settings }: { settings: Settings }) {
           </CardOption>
 
           <CardOption>
-            <template #label>Duration (ms):</template>
+            <template #label>Duration (ms)</template>
             <UiInput v-model="settings.during" type="number" :min="500" :step="100" />
           </CardOption>
 
           <CardOption>
-            <template #label>Font Size: </template>
+            <template #label>Font Size</template>
             <UiInput v-model="settings.fontSize" type="number" min="12" step="2" />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Text Align</template>
+            <UiSelect
+              :selects="{
+                left: 'Left',
+                center: 'Center',
+                right: 'Right',
+              }"
+              v-model="settings.textAlign"
+            />
           </CardOption>
         </div>
 
         <!-- Content Settings -->
         <div flex="~ col gap-4" flex-1>
           <CardOption mode="col">
-            <template #label>Texts (one per line): </template>
+            <template #label>Texts (one per line)</template>
             <TextArea
               :value="textsValue"
               @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
