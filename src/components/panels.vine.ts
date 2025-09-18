@@ -8,6 +8,7 @@ import { getAspect, getHeight } from '../utils'
 
 export function PanelPreview() {
   const settings = vineProp<Settings>()
+  const exportEvent = vineEmits(['export-gif'])
   const height = ref(0)
   const previewer = useTemplateRef('card-preview')
   const width = ref(0)
@@ -50,7 +51,7 @@ export function PanelPreview() {
           </div>
         </div>
       </UiCard>
-      <UiButton type="secondary">
+      <UiButton type="secondary" @click="() => exportEvent('export-gif')">
         <div i-hugeicons-gif01 />
         Export as GIF
       </UiButton>
