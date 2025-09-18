@@ -69,9 +69,9 @@ export function UiButton() {
 
   const typeClassMap: Record<typeof type.value, string> = {
     default: 'border border-neutral-300 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900',
-    secondary: 'bg-neutral-300 dark:bg-neutral-800 hover:bg-neutral-400 dark:hover:bg-neutral-700',
+    secondary: 'bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900',
     destructive: 'border border-red-400 dark:border-none dark:bg-red-950 hover:bg-red-100 dark:hover:bg-red-900',
-    ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-900',
+    ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-800',
   }
 
   const componentType = computed(() => href.value ? 'a' : 'button')
@@ -83,9 +83,10 @@ export function UiButton() {
       target="_blank"
       :class="typeClassMap[type]"
       cursor-pointer
-      p-1
       rounded
       transition-colors
+      flex="~ justify-center items-center gap-1"
+      class="p1.5"
     >
       <slot />
     </component>

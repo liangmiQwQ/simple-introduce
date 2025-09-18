@@ -113,7 +113,10 @@ function PanelPreview() {
           </div>
         </div>
       </UiCard>
-      <UiButton type="secondary"> Export as GIF </UiButton>
+      <UiButton type="secondary">
+        <div i-hugeicons-gif01 />
+        Export as GIF
+      </UiButton>
     </div>
   `
 }
