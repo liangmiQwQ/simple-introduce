@@ -4,6 +4,9 @@ export interface Settings {
   fontSize: number
   textAlign: 'left' | 'center' | 'right'
   texts: string[]
+  export: {
+    appearance: 'dark' | 'light' | 'both'
+  }
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -17,4 +20,7 @@ export const DEFAULT_SETTINGS: Settings = {
     '🎥 We make animated GIFs from your words',
     '✨ Simple, clean, and actually cool',
   ],
+  export: {
+    appearance: 'both',
+  },
 }
