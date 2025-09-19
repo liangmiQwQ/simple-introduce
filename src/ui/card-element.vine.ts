@@ -27,7 +27,7 @@ export function CardOption() {
 
   return vine`
     <div flex="~ gap-2 justify-between" :style>
-      <label class="text-sm font-medium"><slot name="label" /></label>
+      <label class="text-sm font-medium" op85><slot name="label" /></label>
 
       <slot />
     </div>

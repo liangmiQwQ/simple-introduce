@@ -16,7 +16,9 @@ export function UiSelect({ selects, modelValue }: {
       @input="updateValue"
       border
       flex-1
-      class="border-neutral-300 dark:border-neutral-800 p-1 px-2 text-sm rounded"
+      duration-100
+      outline-none
+      class="border-neutral-300 dark:border-neutral-800 p-1 px-2 text-sm rounded op70 focus:op100"
     >
       <option v-for="(item, index) of Object.keys(selects)" :key="item + index" :value="item">
         {{ selects[item] }}
@@ -38,7 +40,9 @@ export function UiInput({ modelValue }: { modelValue?: any }) {
       @input="updateValue"
       flex-1
       border
-      class="border-neutral-300 dark:border-neutral-800 p-1 px-2 text-sm rounded"
+      outline-none
+      class="border-neutral-300 dark:border-neutral-800 p-1 px-2 text-sm rounded op70 focus:op100"
+      duration-100
     />
   `
 }
@@ -54,7 +58,8 @@ export function TextArea({ modelValue }: { modelValue?: any }) {
     <textarea
       :value="modelValue"
       @input="updateValue"
-      class="border-neutral-300 dark:border-neutral-800 outline-none resize-none p-2 rounded"
+      class="border-neutral-300 dark:border-neutral-800 outline-none resize-none p-2 rounded op70 focus:op100"
+      duration-100
       h-32
       border
       font-mono
@@ -68,9 +73,9 @@ export function UiButton() {
   const href = vineProp.withDefault('')
 
   const typeClassMap: Record<typeof type.value, string> = {
-    default: 'border border-neutral-300 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900',
-    secondary: 'bg-neutral-200 dark:bg-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900',
-    destructive: 'border border-red-400 dark:border-none dark:bg-red-950 hover:bg-red-100 dark:hover:bg-red-900',
+    default: 'border border-neutral-300 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 op85 hover:op100',
+    secondary: 'bg-neutral-200 dark:bg-neutral-800 op80 hover:op100',
+    destructive: 'border border-red-400 dark:border-none dark:bg-red-950 hover:bg-red-100 dark:hover:bg-red-900 op80 hover:op100',
     ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-800',
   }
 
@@ -84,7 +89,7 @@ export function UiButton() {
       :class="typeClassMap[type]"
       cursor-pointer
       rounded
-      transition-colors
+      duration-150
       flex="~ justify-center items-center gap-1"
       class="p1.5"
     >
