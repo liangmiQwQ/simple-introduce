@@ -75,7 +75,7 @@ export function UiButton() {
   const typeClassMap: Record<typeof type.value, string> = {
     default: 'border border-neutral-300 dark:border-neutral-800 hover:bg-neutral-100 dark:hover:bg-neutral-900 op85 hover:op100',
     secondary: 'bg-neutral-200 dark:bg-neutral-800 op80 hover:op100',
-    destructive: 'border border-red-400 dark:border-none dark:bg-red-950 hover:bg-red-100 dark:hover:bg-red-900 op80 hover:op100',
+    destructive: 'border border-red-400 dark:border-none dark:bg-red-950 hover:bg-red-100 dark:hover:bg-red-900 op80 hover:op90',
     ghost: 'hover:bg-neutral-100 dark:hover:bg-neutral-800',
   }
 
