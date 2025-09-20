@@ -74,8 +74,8 @@ export async function startScreenshotSession(width: number, height: number) {
     }
 
     const gif = new GIF({
-      workers: 2,
-      quality: 10,
+      workers: navigator.hardwareConcurrency || 4,
+      quality: 1,
       width,
       height,
       workerScript: gifWorkerURL,
