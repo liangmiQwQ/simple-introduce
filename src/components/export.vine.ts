@@ -6,6 +6,7 @@ import { startScreenshotSession } from '@/composables/record'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
 import { Preview } from '@/ui/text-preview.vine'
+import { sleep } from '@/utils'
 
 interface ExportProcess {
   current: number
@@ -93,6 +94,7 @@ function RecordingDisplay() {
     )
 
     if (container.value && session.value.isActive) {
+      await sleep(1000 / 30) // 2 frames
       session.value.startRecording(container.value)
     }
   })
