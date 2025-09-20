@@ -3,10 +3,11 @@ import type { Settings } from '../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
 
-export function Preview({ settings, height, width }: {
+export function Preview({ settings, height, width, appearance }: {
   settings: Settings
   height?: number
   width?: number
+  appearance?: 'light' | 'dark'
 }) {
   const emit = vineEmits(['finish-once'])
   const line = ref(0)
@@ -27,6 +28,12 @@ export function Preview({ settings, height, width }: {
     fontSize: `${settings.fontSize}px`,
     height: `${height}px`,
     width: `${width}px`,
+    ...(appearance === 'dark' && {
+      color: 'white',
+    }),
+    ...(appearance === 'light' && {
+      color: 'black',
+    }),
   }))
 
   watchEffect(() => {

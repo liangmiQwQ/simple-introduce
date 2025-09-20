@@ -1,6 +1,6 @@
 import type { StyleValue } from 'vue'
 import type { Settings } from '@/settings'
-import { computed, reactive, ref, toRaw } from 'vue'
+import { computed, onMounted, reactive, ref, toRaw } from 'vue'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
 import { Preview } from '@/ui/text-preview.vine'
@@ -20,8 +20,9 @@ export function AppExport() {
     current: 0,
     steps: [
       'Configuration',
-      'Record',
-      'Congrats',
+      'Record (Light)',
+      'Record (Dark)',
+      'Complete',
     ],
   })
   const next = () => process.current++
@@ -39,8 +40,9 @@ export function AppExport() {
     >
       <div />
       <SettingPanel v-if="process.current === 0" :settings @cancel="cancel" @next="next" />
-      <RecordingDisplay v-else-if="process.current === 1" :settings @next="next" />
-      <Congrats v-else-if="process.current === 2" @cancel="cancel" />
+      <RecordingDisplay v-else-if="process.current === 1" appearance="light" :settings @next="next" />
+      <RecordingDisplay v-else-if="process.current === 2" appearance="dark" :settings @next="next" />
+      <Congrats v-else-if="process.current === 3" @cancel="cancel" />
       <ExportProgress :steps="process.steps" :current-step="process.current" />
     </div>
   `
@@ -48,6 +50,7 @@ export function AppExport() {
 
 function RecordingDisplay() {
   const settings = vineProp<Settings>()
+  const appearance = vineProp<'dark' | 'light'>()
   const emit = vineEmits(['next'])
 
   const rawSettings = toRaw(settings)
@@ -59,13 +62,26 @@ function RecordingDisplay() {
     ),
   )
 
+  const style = computed((): StyleValue => ({
+    scale: scale.value,
+    ...(appearance.value === 'dark' && {
+      background: 'black',
+    }),
+    ...(appearance.value === 'light' && {
+      background: 'white',
+    }),
+  }))
+
+  onMounted(() => (settings.value.export.appearance !== 'both' && settings.value.export.appearance !== appearance.value) && next())
+
   return vine`
     <!-- Recording Container -->
-    <div dark:bg-black bg-white px-4 :style="{ scale }">
+    <div light px-4 :style>
       <Preview
         :settings
         :width="rawSettings.export.size.width"
         :height="rawSettings.export.size.height"
+        :appearance
         @finishOnce="next"
       />
     </div>
