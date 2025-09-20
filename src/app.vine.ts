@@ -14,7 +14,7 @@ export function App() {
   return vine`
     <main w-full min-h-screen transition-colors duration-300>
       <!-- Export -->
-      <AppExport :settings v-if="exporting" @cancel="cancelExport">Export</AppExport>
+      <AppExport :settings v-if="exporting" @cancel="cancelExport" />
 
       <div class="p-6 md:p-8 lg:p-12" flex="~ col gap-4">
         <!-- Header -->
@@ -46,7 +46,7 @@ function AppHeader() {
         <span font-medium>Simple</span>
         <span op80>Introduce</span>
         <a op60 text-base underline href="https://github.com/liangmiqwq" target="_blank"
-          >by LiangMi</a
+          >by Liang Mi</a
         >
       </h1>
       <div flex="~ items-center gap-1">
