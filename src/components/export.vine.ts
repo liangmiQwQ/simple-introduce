@@ -1,8 +1,9 @@
 import type { StyleValue } from 'vue'
 import type { Settings } from '@/settings'
-import { computed, onMounted, reactive } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
+import { Preview } from '@/ui/text-preview.vine'
 
 interface ExportProcess {
   current: number
@@ -46,12 +47,23 @@ export function AppExport() {
 }
 
 function RecordingDisplay() {
+  const settings = vineProp<Settings>()
   const emit = vineEmits(['next'])
   const next = () => emit('next')
 
-  onMounted(() => setTimeout(next, 1000))
+  const scale = ref<number>(1.5)
 
-  return vine``
+  return vine`
+    <!-- Recording Container -->
+    <div dark:bg-black bg-white px-4 :style="{ scale }">
+      <Preview
+        :settings
+        :width="settings.export.size.width"
+        :height="settings.export.size.height"
+        @finishOnce="next"
+      />
+    </div>
+  `
 }
 
 function Congrats() {
@@ -59,7 +71,7 @@ function Congrats() {
   const cancel = () => emit('cancel')
 
   return vine`
-    <UiCard w-100 class="bg-white dark:bg-dark-900 !py-6" flex="~ col gap-1">
+    <UiCard w-100 class="bg-white dark:bg-dark-900 !py-5" flex="~ col gap-1">
       <div flex="~ items-center justify-between" w-full>
         <span font-bold text-lg>Congrats 🎉</span>
         <UiButton type="ghost" @click="cancel"> <div i-ph-x /> </UiButton>

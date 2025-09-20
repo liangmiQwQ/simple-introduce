@@ -1,5 +1,5 @@
 import type { Settings } from '../settings'
-import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue'
 import { DEFAULT_SETTINGS } from '../settings'
 import { CardOption, UiCard } from '../ui/card-element.vine'
 import { TextArea, UiButton, UiInput, UiSelect } from '../ui/forms.vine'
@@ -8,7 +8,7 @@ import { getAspect, getHeight } from '../utils'
 
 export function PanelPreview() {
   const settings = vineProp<Settings>()
-  const exportEvent = vineEmits(['export-gif'])
+  const emit = vineEmits(['export-gif'])
   const height = ref(0)
   const previewer = useTemplateRef('card-preview')
   const width = ref(0)
@@ -36,6 +36,15 @@ export function PanelPreview() {
 
   const aspect = computed(() => getAspect(width.value, height.value))
 
+  // dynamic update settings
+  // regard the components state as data origin instead of globally replacing
+  watchEffect(() => {
+    settings.value.export.size = {
+      width: width.value,
+      height: height.value,
+    }
+  })
+
   return vine`
     <div flex-1 h-fit flex="~ col gap-2">
       <UiCard w-full class="!py-0">
@@ -51,7 +60,7 @@ export function PanelPreview() {
           </div>
         </div>
       </UiCard>
-      <UiButton type="secondary" @click="() => exportEvent('export-gif')">
+      <UiButton type="secondary" @click="() => emit('export-gif')">
         <div i-hugeicons-gif01 />
         Export as GIF
       </UiButton>

@@ -3,10 +3,12 @@ import type { Settings } from '../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
 
-export function Preview({ settings, height }: {
+export function Preview({ settings, height, width }: {
   settings: Settings
   height?: number
+  width?: number
 }) {
+  const emit = vineEmits(['finish-once'])
   const line = ref(0)
   let interval: ReturnType<typeof setInterval>
 
@@ -24,10 +26,16 @@ export function Preview({ settings, height }: {
   const style = computed(() => ({
     fontSize: `${settings.fontSize}px`,
     height: `${height}px`,
+    width: `${width}px`,
   }))
 
+  watchEffect(() => {
+    if (line.value === settings.texts.length)
+      emit('finish-once')
+  })
+
   return vine`
-    <div select-none cursor-default w-full :style>
+    <div select-none cursor-default :style>
       <FadePreview v-if="settings.type === 'fade'" :texts="settings.texts" :line :settings />
       <BlurPreview v-else-if="settings.type === 'blur'" :texts="settings.texts" :line :settings />
     </div>

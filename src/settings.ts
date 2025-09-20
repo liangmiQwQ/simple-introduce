@@ -6,6 +6,10 @@ export interface Settings {
   texts: string[]
   export: {
     appearance: 'dark' | 'light' | 'both'
+    size: {
+      width: number
+      height: number
+    }
   }
 }
 
@@ -22,5 +26,9 @@ export const DEFAULT_SETTINGS: Settings = {
   ],
   export: {
     appearance: 'both',
+    size: {
+      width: 0,
+      height: 0,
+    },
   },
 }
