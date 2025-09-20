@@ -84,3 +84,9 @@ export function getAspect(width: number, height: number): [number, number] {
 
   return [intWidth / divisor, intHeight / divisor]
 }
+
+export function sleep(time: number) {
+  return new Promise<void>(resolve =>
+    setTimeout(() => resolve(), time),
+  )
+}

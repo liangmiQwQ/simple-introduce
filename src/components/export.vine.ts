@@ -1,6 +1,8 @@
 import type { StyleValue } from 'vue'
+import type { ScreenshotSession } from '@/composables/record'
 import type { Settings } from '@/settings'
-import { computed, onMounted, reactive, ref, toRaw } from 'vue'
+import { computed, onMounted, reactive, ref, toRaw, useTemplateRef } from 'vue'
+import { startScreenshotSession } from '@/composables/record'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
 import { Preview } from '@/ui/text-preview.vine'
@@ -54,14 +56,14 @@ function RecordingDisplay() {
   const emit = vineEmits(['next'])
 
   const rawSettings = toRaw(settings)
-  const next = () => emit('next')
+  const session = ref<ScreenshotSession>()
+  const container = useTemplateRef('container-export')
   const scale = ref<number>(
     Math.min(
       (document.body.offsetHeight - 100) * 0.9 / rawSettings.value.export.size.height,
       document.body.offsetWidth * 0.9 / rawSettings.value.export.size.width,
     ),
   )
-
   const style = computed((): StyleValue => ({
     scale: scale.value,
     ...(appearance.value === 'dark' && {
@@ -71,19 +73,42 @@ function RecordingDisplay() {
       background: 'white',
     }),
   }))
+  const placeholderStyle = computed((): StyleValue => ({ height: `${rawSettings.value.export.size.height}px`, width: `${rawSettings.value.export.size.width}px` }))
 
-  onMounted(() => (settings.value.export.appearance !== 'both' && settings.value.export.appearance !== appearance.value) && next())
+  const next = async () => {
+    session.value!.stopRecording()
+    await session.value!.exportAsGIF()
+    session.value!.dispose()
+    emit('next')
+  }
+
+  onMounted(async () => {
+    if (settings.value.export.appearance !== 'both' && settings.value.export.appearance !== appearance.value) {
+      return next()
+    }
+
+    session.value = await startScreenshotSession(
+      rawSettings.value.export.size.width * scale.value,
+      rawSettings.value.export.size.height * scale.value,
+    )
+
+    if (container.value && session.value.isActive) {
+      session.value.startRecording(container.value)
+    }
+  })
 
   return vine`
     <!-- Recording Container -->
-    <div light px-4 :style>
+    <div light px-4 :style ref="container-export">
       <Preview
+        v-if="session"
         :settings
         :width="rawSettings.export.size.width"
         :height="rawSettings.export.size.height"
         :appearance
         @finishOnce="next"
       />
+      <div v-else :style="placeholderStyle" />
     </div>
   `
 }
