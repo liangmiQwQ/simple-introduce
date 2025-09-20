@@ -1,6 +1,6 @@
 import type { StyleValue } from 'vue'
 import type { Settings } from '@/settings'
-import { computed, reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
 
@@ -19,6 +19,7 @@ export function AppExport() {
     current: 0,
     steps: [
       'Configuration',
+      'Record',
       'Congrats',
     ],
   })
@@ -37,10 +38,20 @@ export function AppExport() {
     >
       <div />
       <SettingPanel v-if="process.current === 0" :settings @cancel="cancel" @next="next" />
-      <Congrats v-else-if="process.current === 1" @next="next" @cancel="cancel" />
+      <RecordingDisplay v-else-if="process.current === 1" :settings @next="next" />
+      <Congrats v-else-if="process.current === 2" @cancel="cancel" />
       <ExportProgress :steps="process.steps" :current-step="process.current" />
     </div>
   `
+}
+
+function RecordingDisplay() {
+  const emit = vineEmits(['next'])
+  const next = () => emit('next')
+
+  onMounted(() => setTimeout(next, 1000))
+
+  return vine``
 }
 
 function Congrats() {
@@ -95,7 +106,7 @@ function ExportProgress() {
   const currentStep = vineProp.withDefault(0)
 
   const style = computed((): StyleValue => ({
-    width: `${100 * (currentStep.value + 1 / steps.value.length)}%`,
+    width: `${100 * ((currentStep.value + 1) / steps.value.length)}%`,
   }))
 
   return vine`
