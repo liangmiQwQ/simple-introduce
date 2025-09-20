@@ -1,3 +1,5 @@
+import GIF from 'gif.js'
+import gifWorkerURL from 'gif.js/dist/gif.worker.js?url'
 import { computed, ref } from 'vue'
 
 // Inspired by https://github.com/slidevjs/slidev/blob/453f1dffaf38347c00f9b0d659bba1e18112476c/packages/client/logic/screenshot.ts
@@ -66,8 +68,46 @@ export async function startScreenshotSession(width: number, height: number) {
     isRecording.value = false
   }
 
-  function exportAsGIF() {
-    // TODO
+  async function exportAsGIF() {
+    if (frames.length === 0) {
+      throw new Error('No frames to export')
+    }
+
+    const gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width,
+      height,
+      workerScript: gifWorkerURL,
+    })
+
+    // Add each frame to the GIF
+    for (const frame of frames) {
+      const tempCanvas = document.createElement('canvas')
+      tempCanvas.width = width
+      tempCanvas.height = height
+      const tempCtx = tempCanvas.getContext('2d')!
+      tempCtx.putImageData(frame, 0, 0)
+
+      gif.addFrame(tempCtx, { delay: 1000 / 60 }) // 60fps
+    }
+
+    // Generate and download the GIF
+    return new Promise<void>((resolve) => {
+      gif.on('finished', (blob: Blob) => {
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = 'introduction.gif'
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+        resolve()
+      })
+
+      gif.render()
+    })
   }
 
   function dispose() {

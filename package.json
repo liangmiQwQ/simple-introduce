@@ -16,12 +16,14 @@
   },
   "dependencies": {
     "@vueuse/core": "^13.9.0",
+    "gif.js": "^0.2.0",
     "motion-v": "^1.7.1",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.9.2",
     "@iconify/json": "^2.2.383",
+    "@types/gif.js": "^0.2.5",
     "@types/node": "^20.17.6",
     "@vue-vine/eslint-config": "^1.1.9",
     "eslint": "^9.15.0",
