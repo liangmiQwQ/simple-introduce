@@ -1,6 +1,6 @@
 import type { StyleValue } from 'vue'
 import type { Settings } from '@/settings'
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, toRaw } from 'vue'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
 import { Preview } from '@/ui/text-preview.vine'
@@ -49,17 +49,23 @@ export function AppExport() {
 function RecordingDisplay() {
   const settings = vineProp<Settings>()
   const emit = vineEmits(['next'])
-  const next = () => emit('next')
 
-  const scale = ref<number>(1.5)
+  const rawSettings = toRaw(settings)
+  const next = () => emit('next')
+  const scale = ref<number>(
+    Math.min(
+      (document.body.offsetHeight - 100) * 0.9 / rawSettings.value.export.size.height,
+      document.body.offsetWidth * 0.9 / rawSettings.value.export.size.width,
+    ),
+  )
 
   return vine`
     <!-- Recording Container -->
     <div dark:bg-black bg-white px-4 :style="{ scale }">
       <Preview
         :settings
-        :width="settings.export.size.width"
-        :height="settings.export.size.height"
+        :width="rawSettings.export.size.width"
+        :height="rawSettings.export.size.height"
         @finishOnce="next"
       />
     </div>
