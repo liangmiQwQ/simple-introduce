@@ -1,7 +1,7 @@
 import type { StyleValue } from 'vue'
 import type { ScreenshotSession } from '@/composables/record'
 import type { Settings } from '@/settings'
-import { computed, onMounted, reactive, ref, toRaw, useTemplateRef } from 'vue'
+import { computed, onMounted, reactive, ref, shallowRef, useTemplateRef } from 'vue'
 import { startScreenshotSession } from '@/composables/record'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
@@ -69,7 +69,7 @@ function RecordingDisplay() {
   const emit = vineEmits(['next'])
 
   const exporting = ref(false)
-  const rawSettings = toRaw(settings)
+  const rawSettings = shallowRef(JSON.parse(JSON.stringify(settings.value)))
   const session = ref<ScreenshotSession>()
   const container = useTemplateRef('container-export')
   const scale = ref<number>(
@@ -109,17 +109,17 @@ function RecordingDisplay() {
     )
 
     if (container.value && session.value.isActive) {
-      await sleep(1000 / 30) // 2 frames
+      await sleep(1000 / 60 * 5) // 5 frames
       session.value.startRecording(container.value)
     }
   })
 
   return vine`
     <!-- Recording Container -->
-    <div light px-4 :style ref="container-export" v-if="!exporting">
+    <div light px-4 py-2 :style ref="container-export" v-if="!exporting">
       <Preview
         v-if="session"
-        :settings
+        :settings="rawSettings"
         :width="rawSettings.export.size.width"
         :height="rawSettings.export.size.height"
         :appearance
