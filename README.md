@@ -1,10 +1,10 @@
 <picture>
   <!-- Dark mode image -->
-  <source srcset="./docs/dark-introduce.png" media="(prefers-color-scheme: dark)">
+  <source srcset="./docs/dark-introduce.gif" media="(prefers-color-scheme: dark)">
   <!-- Light mode image -->
-  <source srcset="./docs/light-introduce.png" media="(prefers-color-scheme: light)">
+  <source srcset="./docs/light-introduce.gif" media="(prefers-color-scheme: light)">
   <!-- Fallback -->
-  <img src="./docs/light-introduce.png" alt="Simple Introduce">
+  <img src="./docs/light-introduce.gif" alt="Simple Introduce">
 </picture>
 
 # Simple Introduce 🎬
