@@ -95,6 +95,9 @@ export async function startScreenshotSession(width: number, height: number) {
     // Generate and download the GIF
     return new Promise<void>((resolve) => {
       gif.on('finished', (blob: Blob) => {
+        // clear
+        frames.length = 0
+
         const url = URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.href = url
@@ -113,7 +116,6 @@ export async function startScreenshotSession(width: number, height: number) {
   function dispose() {
     captureStream.value?.getTracks().forEach(track => track.stop())
     captureStream.value = null
-    frames.length = 0
   }
 
   return {

@@ -93,8 +93,8 @@ function RecordingDisplay() {
     emit('next')
     session.value!.stopRecording()
     exporting.value = true
-    await session.value!.exportAsGIF()
     session.value!.dispose()
+    await session.value!.exportAsGIF()
     emit('next')
   }
 
