@@ -24,11 +24,13 @@ export function AppExport() {
     steps: [
       'Configuration',
       'Record (Light)',
+      'Exporting (Light)',
       'Record (Dark)',
-      'Complete',
+      'Exporting (Dark)',
+      'Finished',
     ],
   })
-  const next = () => process.current++
+  const next = (count?: number) => process.current += count || 1
 
   return vine`
     <div
@@ -43,9 +45,19 @@ export function AppExport() {
     >
       <div />
       <SettingPanel v-if="process.current === 0" :settings @cancel="cancel" @next="next" />
-      <RecordingDisplay v-else-if="process.current === 1" appearance="light" :settings @next="next" />
-      <RecordingDisplay v-else-if="process.current === 2" appearance="dark" :settings @next="next" />
-      <Congrats v-else-if="process.current === 3" @cancel="cancel" />
+      <RecordingDisplay
+        v-else-if="process.current === 1 || process.current === 2"
+        appearance="light"
+        :settings
+        @next="next"
+      />
+      <RecordingDisplay
+        v-else-if="process.current === 3 || process.current === 4"
+        appearance="dark"
+        :settings
+        @next="next"
+      />
+      <Congrats v-else-if="process.current === process.steps.length - 1" @cancel="cancel" />
       <ExportProgress :steps="process.steps" :current-step="process.current" />
     </div>
   `
@@ -56,6 +68,7 @@ function RecordingDisplay() {
   const appearance = vineProp<'dark' | 'light'>()
   const emit = vineEmits(['next'])
 
+  const exporting = ref(false)
   const rawSettings = toRaw(settings)
   const session = ref<ScreenshotSession>()
   const container = useTemplateRef('container-export')
@@ -77,7 +90,9 @@ function RecordingDisplay() {
   const placeholderStyle = computed((): StyleValue => ({ height: `${rawSettings.value.export.size.height}px`, width: `${rawSettings.value.export.size.width}px` }))
 
   const next = async () => {
+    emit('next')
     session.value!.stopRecording()
+    exporting.value = true
     await session.value!.exportAsGIF()
     session.value!.dispose()
     emit('next')
@@ -85,7 +100,7 @@ function RecordingDisplay() {
 
   onMounted(async () => {
     if (settings.value.export.appearance !== 'both' && settings.value.export.appearance !== appearance.value) {
-      return next()
+      return emit('next', 2)
     }
 
     session.value = await startScreenshotSession(
@@ -101,7 +116,7 @@ function RecordingDisplay() {
 
   return vine`
     <!-- Recording Container -->
-    <div light px-4 :style ref="container-export">
+    <div light px-4 :style ref="container-export" v-if="!exporting">
       <Preview
         v-if="session"
         :settings
@@ -112,6 +127,19 @@ function RecordingDisplay() {
       />
       <div v-else :style="placeholderStyle" />
     </div>
+    <UiCard w-100 class="bg-white dark:bg-dark-900 !py-5" v-else>
+      <div animate-pulse flex="~ col gap-1">
+        <div flex="~ items-center gap-2" w-full>
+          <div i-svg-spinners-8-dots-rotate />
+          <span font-medium>Rendering..</span>
+        </div>
+        <span op64 text-sm>
+          Your animation has been recorded! Rendering to GIF now.
+          <span font-bold>Please DO NOT close the exporting page</span>
+          or your GIF will get lost
+        </span>
+      </div>
+    </UiCard>
   `
 }
 
