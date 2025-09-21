@@ -18,19 +18,19 @@
     "@vueuse/core": "^13.9.0",
     "gif.js": "^0.2.0",
     "motion-v": "^1.7.1",
-    "vue": "^3.5.13"
+    "vue": "^3.5.21"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.9.2",
-    "@iconify/json": "^2.2.383",
+    "@antfu/eslint-config": "^5.4.1",
+    "@iconify/json": "^2.2.386",
     "@types/gif.js": "^0.2.5",
-    "@types/node": "^20.17.6",
+    "@types/node": "^24.5.2",
     "@vue-vine/eslint-config": "^1.1.9",
-    "eslint": "^9.15.0",
+    "eslint": "^9.36.0",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.6.3",
-    "unocss": "^66.1.1",
-    "vite": "^6.0.0",
+    "typescript": "^5.9.2",
+    "unocss": "^66.5.1",
+    "vite": "^7.1.6",
     "vue-vine": "^1.7.6",
     "vue-vine-tsc": "^1.7.6"
   }
