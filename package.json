@@ -22,15 +22,15 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
-    "@iconify/json": "^2.2.386",
+    "@iconify/json": "^2.2.390",
     "@types/gif.js": "^0.2.5",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.6.1",
     "@vue-vine/eslint-config": "^1.1.9",
     "eslint": "^9.36.0",
     "npm-run-all": "^4.1.5",
-    "typescript": "^5.9.2",
-    "unocss": "^66.5.1",
-    "vite": "^7.1.6",
+    "typescript": "^5.9.3",
+    "unocss": "^66.5.2",
+    "vite": "^7.1.7",
     "vue-vine": "^1.7.6",
     "vue-vine-tsc": "^1.7.6"
   }
