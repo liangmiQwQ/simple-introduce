@@ -48,10 +48,10 @@ function AppHeader() {
           <div i-hugeicons-gif01 />
           .gif
         </UiButton>
-        <!-- <UiButton px-4 :disabled="true">
+        <UiButton px-4 :disabled="true">
           <div i-hugeicons-svg01 />
           .svg
-        </UiButton> -->
+        </UiButton>
       </div>
       <div flex="~ items-center gap-1">
         <UiButton @click="() => toggleDarkMode()" title="Toggle dark mode" type="ghost">
