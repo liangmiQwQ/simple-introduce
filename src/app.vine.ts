@@ -32,11 +32,11 @@ function AppHeader() {
     <!-- Header -->
     <nav flex="~ justify-between items-center" w-full pr-2>
       <div flex="~ items-center gap-1">
-        <UiButton px-4 :type="isGif ? 'default' : 'ghost'" @click="router.push('/gif')">
+        <UiButton px-4 :type="isGif ? 'secondary' : 'ghost'" @click="router.push('/gif')">
           <div i-hugeicons-gif01 />
           .gif
         </UiButton>
-        <UiButton px-4 :type="isSvg ? 'default' : 'ghost'" @click="router.push('/svg')">
+        <UiButton px-4 :type="isSvg ? 'secondary' : 'ghost'" @click="router.push('/svg')">
           <div i-hugeicons-svg01 />
           .svg
         </UiButton>
