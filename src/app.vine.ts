@@ -1,36 +1,18 @@
-import type { Settings } from './settings'
-import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
+import { useDark, useToggle } from '@vueuse/core'
+import { useRoute, useRouter } from 'vue-router'
 import VineLogo from '@/assets/vine-logo.png'
-import { AppExport } from './components/export.vine'
-import { PanelPreview, PanelSettings } from './components/panels.vine'
-import { useExport } from './composables/export'
-import { DEFAULT_SETTINGS } from './settings'
 import { UiButton } from './ui/forms.vine'
 
 export function App() {
-  const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
-  const { exporting, cancelExport, startExport } = useExport()
-
   return vine`
     <Footer />
     <main w-full min-h-screen transition-colors duration-300>
-      <!-- Export -->
-      <AppExport :settings v-if="exporting" @cancel="cancelExport" />
-
       <div class="p-6 md:p-8 lg:p-12" flex="~ col gap-4">
         <!-- Header -->
         <AppHeader />
 
-        <!-- Content Area -->
-        <div flex="~ col lg:row gap-6" w-full>
-          <!-- Settings Panel -->
-          <div class="w-full lg:w-96">
-            <PanelSettings :settings="settings" />
-          </div>
-
-          <!-- Preview Area -->
-          <PanelPreview :settings @exportGif="startExport" />
-        </div>
+        <!-- Router View -->
+        <RouterView />
       </div>
     </main>
   `
@@ -39,16 +21,21 @@ export function App() {
 function AppHeader() {
   const isDark = useDark()
   const toggleDarkMode = useToggle(isDark)
+  const router = useRouter()
+  const route = useRoute()
+
+  const isGif = computed(() => route.path === '/gif')
+  const isSvg = computed(() => route.path === '/svg')
 
   return vine`
     <!-- Header -->
     <nav flex="~ justify-between items-center" w-full pr-2>
       <div flex="~ items-center gap-1">
-        <UiButton px-4>
+        <UiButton px-4 :type="isGif ? 'default' : 'ghost'" @click="router.push('/gif')">
           <div i-hugeicons-gif01 />
           .gif
         </UiButton>
-        <UiButton px-4 :disabled="true">
+        <UiButton px-4 :type="isSvg ? 'default' : 'ghost'" @click="router.push('/svg')">
           <div i-hugeicons-svg01 />
           .svg
         </UiButton>

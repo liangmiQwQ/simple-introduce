@@ -1,6 +1,6 @@
-import type { Settings } from '../settings'
+import type { Settings, SvgSettings } from '../settings'
 import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffect } from 'vue'
-import { DEFAULT_SETTINGS } from '../settings'
+import { DEFAULT_SETTINGS, DEFAULT_SVG_SETTINGS } from '../settings'
 import { CardOption, UiCard } from '../ui/card-element.vine'
 import { TextArea, UiButton, UiInput, UiSelect } from '../ui/forms.vine'
 import { Preview } from '../ui/text-preview.vine'
@@ -73,7 +73,6 @@ export function PanelSettings({ settings }: { settings: Settings }) {
     Object.assign(settings, DEFAULT_SETTINGS)
   }
 
-  // eslint-disable-next-line unused-imports/no-unused-vars
   const updateTexts = (text: string) => {
     settings.texts = text.split('\n').filter(line => line.trim())
   }
@@ -104,6 +103,95 @@ export function PanelSettings({ settings }: { settings: Settings }) {
           <CardOption>
             <template #label>Font Size</template>
             <UiInput v-model="settings.fontSize" type="number" min="12" step="2" />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Text Align</template>
+            <UiSelect
+              :selects="{
+                left: 'Left',
+                center: 'Center',
+                right: 'Right',
+              }"
+              v-model="settings.textAlign"
+            />
+          </CardOption>
+        </div>
+
+        <!-- Content Settings -->
+        <div flex="~ col gap-4" flex-1>
+          <CardOption mode="col">
+            <template #label>Texts (one per line)</template>
+            <TextArea
+              :value="textsValue"
+              @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
+              placeholder="Enter texts, one per line"
+            />
+          </CardOption>
+
+          <UiButton @click="resetSettings" type="destructive"> Reset to Default </UiButton>
+        </div>
+      </div>
+    </UiCard>
+  `
+}
+
+export function PanelSvgSettings({ settings }: { settings: SvgSettings }) {
+  const resetSettings = () => {
+    Object.assign(settings, DEFAULT_SVG_SETTINGS)
+  }
+
+  const updateTexts = (text: string) => {
+    settings.texts = text.split('\n').filter(line => line.trim())
+  }
+
+  const textsValue = computed(() => settings.texts.join('\n'))
+
+  return vine`
+    <UiCard>
+      <div flex="~ gap-6 md:row col lg:col">
+        <!-- Animation Settings -->
+        <div flex="~ col gap-4" class="w-full md:w-80 lg:w-full">
+          <CardOption>
+            <template #label>Animation Type</template>
+            <UiSelect
+              :selects="{
+                fade: 'Fade',
+                blur: 'Blur',
+              }"
+              v-model="settings.animation"
+            />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Theme</template>
+            <UiSelect
+              :selects="{
+                light: 'Light',
+                dark: 'Dark',
+              }"
+              v-model="settings.theme"
+            />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Duration (ms)</template>
+            <UiInput v-model="settings.duration" type="number" :min="500" :step="100" />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Font Size</template>
+            <UiInput v-model="settings.fontSize" type="number" min="12" step="2" />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Width</template>
+            <UiInput v-model="settings.width" type="number" min="100" step="10" />
+          </CardOption>
+
+          <CardOption>
+            <template #label>Height</template>
+            <UiInput v-model="settings.height" type="number" min="50" step="10" />
           </CardOption>
 
           <CardOption>

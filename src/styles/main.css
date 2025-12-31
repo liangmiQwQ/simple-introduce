@@ -34,3 +34,14 @@ html {
   border-radius: 1px;
   background: transparent;
 }
+
+.checker-bg {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image:  linear-gradient(#444cf7 1px, transparent 1px), linear-gradient(90deg, #444cf7 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dark .checker-bg {
+  background-color: #1a1a1a;
+  background-image:  linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px);
+}
