@@ -45,7 +45,9 @@ export function SvgExport({ settings, onClose }: { settings: SvgSettings, onClos
         </div>
 
         <!-- Preview -->
-        <div class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded overflow-auto font-mono text-xs h-64 whitespace-pre">
+        <div
+          class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded overflow-auto font-mono text-xs h-64 whitespace-pre"
+        >
           {{ svgContent }}
         </div>
 
