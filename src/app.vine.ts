@@ -34,11 +34,11 @@ function AppHeader() {
       <div flex="~ items-center gap-1">
         <UiButton px-4 :type="isGif ? 'secondary' : 'ghost'" @click="router.push('/gif')">
           <div i-hugeicons-gif01 />
-          .gif
+          <span class="hidden sm:inline">.gif</span>
         </UiButton>
         <UiButton px-4 :type="isSvg ? 'secondary' : 'ghost'" @click="router.push('/svg')">
           <div i-hugeicons-svg01 />
-          .svg
+          <span class="hidden sm:inline">.svg</span>
         </UiButton>
       </div>
       <div flex="~ items-center gap-1">
@@ -52,7 +52,13 @@ function AppHeader() {
         <span op90 flex gap-1>
           <span font-medium>Simple</span>
           <span op80>Introduce</span>
-          <a op60 text-base underline href="https://github.com/liangmiqwq" target="_blank"
+          <a
+            op60
+            text-base
+            underline
+            class="hidden sm:inline"
+            href="https://github.com/liangmiqwq"
+            target="_blank"
             >by Liang Mi</a
           >
         </span>
@@ -63,7 +69,15 @@ function AppHeader() {
 
 function Footer() {
   return vine`
-    <div flex="~ items-center gap-2" select-none ml-2 fixed bottom-5 right-5>
+    <div
+      flex="~ items-center gap-2"
+      select-none
+      ml-2
+      fixed
+      bottom-5
+      right-5
+      class="hidden sm:flex z-10"
+    >
       <div op50>Made with</div>
       <a
         class="op60 hover:op70"

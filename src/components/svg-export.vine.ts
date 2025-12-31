@@ -37,7 +37,7 @@ export function SvgExport({ settings, onClose }: { settings: SvgSettings, onClos
       flex="~ items-center justify-center"
       @click.self="onClose"
     >
-      <UiCard class="bg-white dark:bg-dark-900 w-full max-w-2xl max-h-90vh flex flex-col gap-4">
+      <UiCard class="bg-white dark:bg-dark-900 w-full max-w-3xl max-h-60vh flex flex-col gap-4">
         <!-- Header -->
         <div flex="~ items-center justify-between">
           <span font-medium text-lg>Export SVG</span>
@@ -46,7 +46,7 @@ export function SvgExport({ settings, onClose }: { settings: SvgSettings, onClos
 
         <!-- Preview -->
         <div
-          class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded overflow-auto font-mono text-xs h-64 whitespace-pre"
+          class="bg-neutral-100 dark:bg-neutral-800 p-4 rounded overflow-auto font-mono text-xs h-80 whitespace-pre"
         >
           {{ svgContent }}
         </div>
