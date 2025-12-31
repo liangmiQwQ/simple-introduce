@@ -1,4 +1,5 @@
 import { useDark, useToggle } from '@vueuse/core'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import VineLogo from '@/assets/vine-logo.png'
 import { UiButton } from './ui/forms.vine'
