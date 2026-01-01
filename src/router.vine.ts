@@ -1,9 +1,9 @@
 import type { Settings } from './settings'
 import { useLocalStorage } from '@vueuse/core'
 import { createRouter, createWebHistory } from 'vue-router'
-import { GifExport } from './components/gif-export.vine'
+import { GifExport } from './components/gif/gif-export.vine'
 import { PanelPreview, PanelSettings } from './components/panels.vine'
-import { SvgExport } from './components/svg-export.vine'
+import { SvgExport } from './components/svg/svg-export.vine'
 import { useExport } from './composables/export'
 import { DEFAULT_SETTINGS } from './settings'
 

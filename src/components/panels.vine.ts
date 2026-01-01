@@ -3,8 +3,9 @@ import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch, watchEffe
 import { DEFAULT_SETTINGS } from '../settings'
 import { CardOption, UiCard } from '../ui/card-element.vine'
 import { TextArea, UiButton, UiInput, UiSelect } from '../ui/forms.vine'
-import { Preview } from '../ui/text-preview.vine'
 import { getAspect, getHeight } from '../utils'
+import { GifPreview } from './gif/gif-preview.vine'
+import { SvgPreview } from './svg/svg-preview.vine'
 
 export function PanelPreview() {
   const settings = vineProp<Settings>()
@@ -49,7 +50,8 @@ export function PanelPreview() {
   return vine`
     <div flex-1 h-fit flex="~ col gap-2">
       <UiCard w-full class="!py-0">
-        <Preview ref="card-preview" :height :settings :mode />
+        <GifPreview ref="card-preview" :height :settings v-if="mode === 'gif'" />
+        <SvgPreview ref="card-preview" :height :settings v-else-if="mode === 'svg'" />
         <div p-2 text-sm flex="~ items-center gap-4 justify-center" op60 w-full>
           <div flex="~ items-center gap-1">
             <span op50>Size</span>

@@ -2,10 +2,10 @@ import type { StyleValue } from 'vue'
 import type { ScreenshotSession } from '@/composables/record'
 import type { Settings } from '@/settings'
 import { computed, onMounted, reactive, ref, shallowRef, useTemplateRef } from 'vue'
+import { GifPreview } from '@/components/gif/gif-preview.vine'
 import { startScreenshotSession } from '@/composables/record'
 import { CardOption, UiCard } from '@/ui/card-element.vine'
 import { UiButton, UiSelect } from '@/ui/forms.vine'
-import { Preview } from '@/ui/text-preview.vine'
 import { sleep } from '@/utils'
 
 interface ExportProcess {
@@ -117,14 +117,13 @@ function RecordingDisplay() {
   return vine`
     <!-- Recording Container -->
     <div light px-4 py-2 :style ref="container-export" v-if="!exporting">
-      <Preview
+      <GifPreview
         v-if="session"
         :settings="rawSettings"
         :width="rawSettings.export.size.width"
         :height="rawSettings.export.size.height"
         :appearance
         @finishOnce="next"
-        mode="gif"
       />
       <div v-else :style="placeholderStyle" />
     </div>
