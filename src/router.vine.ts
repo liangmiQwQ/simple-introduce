@@ -1,8 +1,9 @@
 import type { Settings } from './settings'
 import { useLocalStorage } from '@vueuse/core'
 import { createRouter, createWebHistory } from 'vue-router'
-import { AppExport } from './components/export.vine'
+import { GifExport } from './components/gif-export.vine'
 import { PanelPreview, PanelSettings } from './components/panels.vine'
+import { SvgExport } from './components/svg-export.vine'
 import { useExport } from './composables/export'
 import { DEFAULT_SETTINGS } from './settings'
 
@@ -13,7 +14,7 @@ export function SvgPage() {
   return vine`
     <div flex="~ col lg:row gap-6" w-full>
       <!-- Export Overlay -->
-      <AppExport :settings v-if="exporting" @cancel="cancelExport" />
+      <SvgExport :settings v-if="exporting" @cancel="cancelExport" />
 
       <!-- Settings Panel -->
       <div class="w-full lg:w-96">
@@ -33,7 +34,7 @@ export function GifPage() {
   return vine`
     <div flex="~ col lg:row gap-6" w-full>
       <!-- Export Overlay -->
-      <AppExport :settings v-if="exporting" @cancel="cancelExport" />
+      <GifExport :settings v-if="exporting" @cancel="cancelExport" />
 
       <!-- Settings Panel -->
       <div class="w-full lg:w-96">

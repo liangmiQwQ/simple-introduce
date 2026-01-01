@@ -13,7 +13,7 @@ interface ExportProcess {
   steps: string[]
 }
 
-export function AppExport() {
+export function GifExport() {
   const settings = vineProp<Settings>()
   const emit = vineEmits(['cancel'])
   const cancel = () => emit('cancel')
