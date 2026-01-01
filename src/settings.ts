@@ -21,7 +21,7 @@ export const DEFAULT_SETTINGS: Settings = {
   texts: [
     '👋 Hi there, fellow developer',
     '📱 Tired of boring GitHub profiles?',
-    '🎥 We make animated GIFs from your words',
+    '🎥 We make animated images from your words',
     '✨ Simple, clean, and actually cool',
   ],
   export: {

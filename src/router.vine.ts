@@ -47,7 +47,7 @@ export function SvgPage() {
 }
 
 const routes = [
-  { path: '/', redirect: '/gif' },
+  { path: '/', redirect: '/svg' },
   { path: '/gif', component: GifPage },
   { path: '/svg', component: SvgPage },
 ]
