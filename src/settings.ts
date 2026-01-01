@@ -13,17 +13,6 @@ export interface Settings {
   }
 }
 
-export interface SvgSettings {
-  texts: string[]
-  fontSize: number
-  textAlign: 'left' | 'center' | 'right'
-  animation: 'fade' | 'blur'
-  duration: number
-  width: number
-  height: number
-  theme: 'light' | 'dark'
-}
-
 export const DEFAULT_SETTINGS: Settings = {
   during: 2000,
   type: 'blur',
@@ -42,20 +31,4 @@ export const DEFAULT_SETTINGS: Settings = {
       height: 0,
     },
   },
-}
-
-export const DEFAULT_SVG_SETTINGS: SvgSettings = {
-  texts: [
-    '👋 Hi there, fellow developer',
-    '🎨 SVG animations are crisp & scalable',
-    '⚡️ Smaller file size, better quality',
-    '✨ Try it out now!',
-  ],
-  fontSize: 48,
-  textAlign: 'center',
-  animation: 'fade',
-  duration: 2000,
-  width: 800,
-  height: 200,
-  theme: 'light',
 }
