@@ -3,11 +3,12 @@ import type { Settings } from '../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
 
-export function Preview({ settings, height, width, appearance }: {
+export function Preview({ settings, height, width, appearance, mode }: {
   settings: Settings
   height?: number
   width?: number
   appearance?: 'light' | 'dark'
+  mode: 'svg' | 'gif'
 }) {
   const emit = vineEmits(['finish-once'])
   const line = ref(0)

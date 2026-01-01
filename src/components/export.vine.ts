@@ -124,6 +124,7 @@ function RecordingDisplay() {
         :height="rawSettings.export.size.height"
         :appearance
         @finishOnce="next"
+        mode="gif"
       />
       <div v-else :style="placeholderStyle" />
     </div>

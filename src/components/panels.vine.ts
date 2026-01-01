@@ -8,7 +8,8 @@ import { getAspect, getHeight } from '../utils'
 
 export function PanelPreview() {
   const settings = vineProp<Settings>()
-  const emit = vineEmits(['export-gif'])
+  const mode = vineProp<'svg' | 'gif'>()
+  const emit = vineEmits(['export'])
   const height = ref(0)
   const previewer = useTemplateRef('card-preview')
   const width = ref(0)
@@ -48,7 +49,7 @@ export function PanelPreview() {
   return vine`
     <div flex-1 h-fit flex="~ col gap-2">
       <UiCard w-full class="!py-0">
-        <Preview ref="card-preview" :height :settings="settings" />
+        <Preview ref="card-preview" :height :settings :mode />
         <div p-2 text-sm flex="~ items-center gap-4 justify-center" op60 w-full>
           <div flex="~ items-center gap-1">
             <span op50>Size</span>
@@ -60,9 +61,13 @@ export function PanelPreview() {
           </div>
         </div>
       </UiCard>
-      <UiButton type="secondary" @click="() => emit('export-gif')">
+      <UiButton type="secondary" @click="() => emit('export')" v-if="mode === 'gif'">
         <div i-hugeicons-gif01 />
         Export as GIF
+      </UiButton>
+      <UiButton type="secondary" @click="() => emit('export')" v-else-if="mode === 'svg'">
+        <div i-hugeicons-svg01 />
+        Export as SVG
       </UiButton>
     </div>
   `
