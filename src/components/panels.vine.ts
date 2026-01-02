@@ -87,12 +87,15 @@ export function PanelSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <UiCard>
+    <UiCard class="op80 hover:op100 transition duration-100">
       <div flex="~ gap-6 md:row col lg:col">
         <!-- Animation Settings -->
         <div flex="~ col gap-4" class="w-full md:w-80 lg:w-full">
           <CardOption>
-            <template #label>Animation Type</template>
+            <template #label>
+              <div i-ph-tag-simple-duotone />
+              Animation Type
+            </template>
             <UiSelect
               :selects="{
                 fade: 'Fade',
@@ -103,17 +106,36 @@ export function PanelSettings({ settings }: { settings: Settings }) {
           </CardOption>
 
           <CardOption>
-            <template #label>Duration (ms)</template>
+            <template #label>
+              <div i-ph-alarm-duotone />
+              Duration (ms)
+            </template>
             <UiInput v-model="settings.during" type="number" :min="500" :step="100" />
           </CardOption>
 
           <CardOption>
-            <template #label>Font Size</template>
+            <template #label>
+              <div i-ph-magnifying-glass-duotone />
+              Font Size
+            </template>
             <UiInput v-model="settings.fontSize" type="number" min="12" step="2" />
           </CardOption>
 
           <CardOption>
-            <template #label>Text Align</template>
+            <template #label>
+              <div i-ph-text-a-underline-bold />
+              Font Family
+            </template>
+            <UiInput v-model="settings.fontFamily" type="text" />
+          </CardOption>
+
+          <CardOption>
+            <template #label>
+              <div i-ph-align-left-duotone v-if="settings.textAlign === 'left'" />
+              <div i-ph-align-center-horizontal-duotone v-else-if="settings.textAlign === 'center'" />
+              <div i-ph-align-right-duotone v-else />
+              Text Align
+            </template>
             <UiSelect
               :selects="{
                 left: 'Left',
@@ -128,7 +150,10 @@ export function PanelSettings({ settings }: { settings: Settings }) {
         <!-- Content Settings -->
         <div flex="~ col gap-4" flex-1>
           <CardOption mode="col">
-            <template #label>Texts (one per line)</template>
+            <template #label>
+              <div i-ph-cursor-text-duotone />
+              Texts (one per line)
+            </template>
             <TextArea
               :value="textsValue"
               @input="(e: Event) => updateTexts((e.target as HTMLTextAreaElement).value)"
@@ -136,7 +161,10 @@ export function PanelSettings({ settings }: { settings: Settings }) {
             />
           </CardOption>
 
-          <UiButton @click="resetSettings" type="destructive"> Reset to Default </UiButton>
+          <UiButton @click="resetSettings" type="destructive" text-sm>
+            <div i-solar-trash-bin-trash-broken />
+            Reset Settings
+          </UiButton>
         </div>
       </div>
     </UiCard>
