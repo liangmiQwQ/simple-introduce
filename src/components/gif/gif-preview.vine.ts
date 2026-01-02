@@ -1,9 +1,9 @@
 import type { StyleValue } from 'vue'
-import type { Settings } from '../settings'
+import type { Settings } from '../../settings'
 import { motion } from 'motion-v'
 import { computed, onUnmounted, ref, useTemplateRef, watchEffect } from 'vue'
 
-export function Preview({ settings, height, width, appearance }: {
+export function GifPreview({ settings, height, width, appearance }: {
   settings: Settings
   height?: number
   width?: number
@@ -34,6 +34,7 @@ export function Preview({ settings, height, width, appearance }: {
     ...(appearance === 'light' && {
       color: 'black',
     }),
+    fontFamily: settings.fontFamily,
   }))
 
   watchEffect(() => {

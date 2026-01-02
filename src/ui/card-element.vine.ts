@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 export function UiCard() {
   return vine`
-    <div border border-neutral-200 dark:border-neutral-800 rounded shadow-sm p-4 transition-colors>
+    <div border border-neutral-200 dark:border-neutral-800 rounded-lg shadow-sm p-4>
       <slot />
     </div>
   `
@@ -27,7 +27,9 @@ export function CardOption() {
 
   return vine`
     <div flex="~ gap-2 justify-between" :style>
-      <label class="text-sm font-medium" op85><slot name="label" /></label>
+      <label class="text-sm font-medium" flex="~ gap-1.5 items-center" text-sm op85>
+        <slot name="label" />
+      </label>
 
       <slot />
     </div>

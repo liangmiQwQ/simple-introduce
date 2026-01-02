@@ -1,36 +1,19 @@
-import type { Settings } from './settings'
-import { useDark, useLocalStorage, useToggle } from '@vueuse/core'
+import { useDark, useToggle } from '@vueuse/core'
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import VineLogo from '@/assets/vine-logo.png'
-import { AppExport } from './components/export.vine'
-import { PanelPreview, PanelSettings } from './components/panels.vine'
-import { useExport } from './composables/export'
-import { DEFAULT_SETTINGS } from './settings'
 import { UiButton } from './ui/forms.vine'
 
 export function App() {
-  const settings = useLocalStorage<Settings>('simple-introduce-settings', DEFAULT_SETTINGS)
-  const { exporting, cancelExport, startExport } = useExport()
-
   return vine`
     <Footer />
     <main w-full min-h-screen transition-colors duration-300>
-      <!-- Export -->
-      <AppExport :settings v-if="exporting" @cancel="cancelExport" />
-
       <div class="p-6 md:p-8 lg:p-12" flex="~ col gap-4">
         <!-- Header -->
         <AppHeader />
 
-        <!-- Content Area -->
-        <div flex="~ col lg:row gap-6" w-full>
-          <!-- Settings Panel -->
-          <div class="w-full lg:w-96">
-            <PanelSettings :settings="settings" />
-          </div>
-
-          <!-- Preview Area -->
-          <PanelPreview :settings @exportGif="startExport" />
-        </div>
+        <!-- Router View -->
+        <RouterView />
       </div>
     </main>
   `
@@ -39,19 +22,24 @@ export function App() {
 function AppHeader() {
   const isDark = useDark()
   const toggleDarkMode = useToggle(isDark)
+  const router = useRouter()
+  const route = useRoute()
+
+  const isSvg = computed(() => route.path === '/svg')
+  const isGif = computed(() => route.path === '/gif')
 
   return vine`
     <!-- Header -->
     <nav flex="~ justify-between items-center" w-full pr-2>
       <div flex="~ items-center gap-1">
-        <UiButton px-4>
-          <div i-hugeicons-gif01 />
-          .gif
-        </UiButton>
-        <!-- <UiButton px-4 :disabled="true">
+        <UiButton px-4 :type="isSvg ? 'secondary' : 'ghost'" @click="router.push('/svg')">
           <div i-hugeicons-svg01 />
-          .svg
-        </UiButton> -->
+          <span class="hidden sm:inline">.svg</span>
+        </UiButton>
+        <UiButton px-4 :type="isGif ? 'secondary' : 'ghost'" @click="router.push('/gif')">
+          <div i-hugeicons-gif01 />
+          <span class="hidden sm:inline">.gif</span>
+        </UiButton>
       </div>
       <div flex="~ items-center gap-1">
         <UiButton @click="() => toggleDarkMode()" title="Toggle dark mode" type="ghost">
@@ -64,7 +52,13 @@ function AppHeader() {
         <span op90 flex gap-1>
           <span font-medium>Simple</span>
           <span op80>Introduce</span>
-          <a op60 text-base underline href="https://github.com/liangmiqwq" target="_blank"
+          <a
+            op60
+            text-base
+            underline
+            class="hidden sm:inline"
+            href="https://github.com/liangmiqwq"
+            target="_blank"
             >by Liang Mi</a
           >
         </span>
@@ -75,7 +69,15 @@ function AppHeader() {
 
 function Footer() {
   return vine`
-    <div flex="~ items-center gap-2" select-none ml-2 fixed bottom-5 right-5>
+    <div
+      flex="~ items-center gap-2"
+      select-none
+      ml-2
+      fixed
+      bottom-5
+      right-5
+      class="hidden sm:flex z-10"
+    >
       <div op50>Made with</div>
       <a
         class="op60 hover:op70"

@@ -91,7 +91,7 @@ export function UiButton() {
       rounded
       duration-150
       flex="~ justify-center items-center gap-1"
-      class="p1.5"
+      class="p1.5 py-1.2"
     >
       <slot />
     </component>
