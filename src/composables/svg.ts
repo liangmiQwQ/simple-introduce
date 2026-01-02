@@ -1,5 +1,5 @@
 import type { Settings, SvgAppearance } from '../settings'
-import { getHeight } from '@/utils'
+import { escapeHtml, getHeight } from '@/utils'
 
 function getSvg(style: string, childrens: string, width: number, height: number): string {
   return [
@@ -12,7 +12,7 @@ function getSvg(style: string, childrens: string, width: number, height: number)
 
 function getTextSpans(texts: string[]): string {
   return texts.map((text, index) =>
-    `<span class="l${index}">${text}</span>`,
+    `<span class="l${index}">${escapeHtml(text)}</span>`,
   ).join('')
 }
 

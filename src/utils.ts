@@ -30,6 +30,12 @@ export function getHTML(text: string) {
   return text
 }
 
+export function escapeHtml(text: string) {
+  const div = document.createElement('div')
+  div.textContent = text
+  return div.innerHTML
+}
+
 export function getAspect(width: number, height: number): [number, number] {
   if (width <= 0 || height <= 0 || !Number.isFinite(width) || !Number.isFinite(height)) {
     return [0, 0]
