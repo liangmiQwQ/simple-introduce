@@ -1,17 +1,18 @@
-<picture>
-  <!-- Dark mode image -->
-  <source srcset="./docs/dark-introduce.gif" media="(prefers-color-scheme: dark)">
-  <!-- Light mode image -->
-  <source srcset="./docs/light-introduce.gif" media="(prefers-color-scheme: light)">
-  <!-- Fallback -->
-  <img src="./docs/light-introduce.gif" alt="Simple Introduce">
-</picture>
+![Simple Introduce](/docs/introduce.svg)
 
 # Simple Introduce 🎬
 
 A modern web app for creating beautiful animated text introductions and exporting them as GIFs. Perfect for GitHub profiles, READMEs, and social media.
 
-![App Screenshot](./docs/screenshot.jpeg)
+<picture>
+  <!-- Dark mode image -->
+  <source srcset="./docs/dark-screenshot.png" media="(prefers-color-scheme: dark)">
+  <!-- Light mode image -->
+  <source srcset="./docs/light-screenshot.png" media="(prefers-color-scheme: light)">
+  <!-- Fallback -->
+  <img src="./docs/light-screenshot.png" alt="Simple Introduce">
+</picture>
+
 
 ## ✨ Features
 
