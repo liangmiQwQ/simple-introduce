@@ -26,7 +26,7 @@ function getStyleHeader(settings: Settings, appearance: SvgAppearance, width: nu
     appearance === 'dark' && background && `;background:#000`,
     `}`,
     appearance === 'auto' && `@media(prefers-color-scheme:dark){*{ color:#fff${background ? ';background:#000' : ''}}}@media(prefers-color-scheme:light){*{ color:#000${background ? ';background:#fff' : ''}}}`,
-    `span{font-size:${settings.fontSize}px;display:block;position:absolute;animation:a ${settings.during * settings.texts.length}ms linear infinite;opacity:0}`,
+    `span{font-size:${settings.fontSize}px;width:100%;display:block;position:absolute;animation:a ${settings.during * settings.texts.length}ms linear infinite;opacity:0}`,
     ...settings.texts.map((text, index) => `.l${index}{top:${(height - getHeight(width, settings, text)) / 2}px;animation-delay:${index * settings.during}ms}`),
   ].filter(Boolean).join('')
 }
