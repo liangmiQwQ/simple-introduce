@@ -34,6 +34,7 @@ export function GifPreview({ settings, height, width, appearance }: {
     ...(appearance === 'light' && {
       color: 'black',
     }),
+    fontFamily: settings.fontFamily,
   }))
 
   watchEffect(() => {

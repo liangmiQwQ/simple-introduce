@@ -10,6 +10,7 @@ export function getHeight(width: number, settings: Settings) {
   el.style.pointerEvents = 'none'
   el.style.left = '-9999px'
   el.style.top = '-9999px'
+  el.style.fontFamily = settings.fontFamily
   document.body.appendChild(el)
 
   const heightList: number[] = []

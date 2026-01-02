@@ -1,0 +1,43 @@
+<svg width="694" height="188" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    * { 
+      color: black;
+      font-family: Helvetica, Arial, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      * { color: white; }
+    }
+
+    span {
+      font-size: 55px;
+      display: block;
+      position: absolute;
+    }
+
+    .line1 {
+      top: 52px;
+    }
+
+    .line2 {
+      top: 10px;
+    }
+
+    .line3 {
+      top: 10px;
+    }
+
+    .line4 {
+      top: 10px;
+    }
+  </style>
+  
+   <foreignObject width="694" height="188">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <!-- <span class="line1">👋 Hi there, fellow developer</span> -->
+      <!-- <span class="line2">📱 Tired of boring GitHub profiles?</span> -->
+      <!-- <span class="line3">🎥 We make animated images from your words</span> -->
+      <!-- <span class="line4">✨ Simple, clean, and actually cool</span> -->
+    </div>
+  </foreignObject>
+</svg>
