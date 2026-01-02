@@ -1,3 +1,5 @@
+export type SvgAppearance = 'dark' | 'light' | 'auto'
+
 export interface Settings {
   during: number
   type: 'blur' | 'fade'
@@ -6,7 +8,13 @@ export interface Settings {
   textAlign: 'left' | 'center' | 'right'
   texts: string[]
   export: {
-    appearance: 'dark' | 'light' | 'both'
+    gif: {
+      appearance: 'dark' | 'light' | 'both'
+    }
+    svg: {
+      appearance: SvgAppearance
+      background: boolean
+    }
     size: {
       width: number
       height: number
@@ -27,7 +35,13 @@ export const DEFAULT_SETTINGS: Settings = {
     '✨ Simple, clean, and actually cool',
   ],
   export: {
-    appearance: 'both',
+    gif: {
+      appearance: 'both',
+    },
+    svg: {
+      appearance: 'auto',
+      background: false,
+    },
     size: {
       width: 0,
       height: 0,

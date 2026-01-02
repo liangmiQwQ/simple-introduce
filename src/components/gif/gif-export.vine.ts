@@ -99,7 +99,7 @@ function RecordingDisplay() {
   }
 
   onMounted(async () => {
-    if (settings.value.export.appearance !== 'both' && settings.value.export.appearance !== appearance.value) {
+    if (settings.value.export.gif.appearance !== 'both' && settings.value.export.gif.appearance !== appearance.value) {
       return emit('next', 2)
     }
 
@@ -181,7 +181,7 @@ function SettingPanel() {
               light: 'Light Only',
               dark: 'Dark Only',
             }"
-            v-model="settings.export.appearance"
+            v-model="settings.export.gif.appearance"
           />
         </CardOption>
         <UiButton class="!p1" @click="next">Generate GIF</UiButton>

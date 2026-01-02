@@ -1,7 +1,6 @@
 <svg width="694" height="188" xmlns="http://www.w3.org/2000/svg">
   <style>
-    * { 
-      color: black;
+    * {
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     }
 
@@ -9,8 +8,13 @@
       * { color: white; }
     }
 
+    @media (prefers-color-scheme: light) {
+      * { color: black; }
+    }
+
+
     span {
-      font-size: 55px;
+      font-size: 56px;
       display: block;
       position: absolute;
       animation: blur 8000ms linear infinite;

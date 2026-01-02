@@ -1,6 +1,6 @@
 import type { Settings } from './settings'
 
-export function getHeight(width: number, settings: Settings) {
+export function getHeight(width: number, settings: Settings, text?: string) {
   const el = document.createElement('div')
 
   el.style.width = `${width}px`
@@ -15,7 +15,8 @@ export function getHeight(width: number, settings: Settings) {
 
   const heightList: number[] = []
 
-  for (const text of settings.texts) {
+  const texts = text === undefined ? settings.texts : [text]
+  for (const text of texts) {
     el.innerHTML = getHTML(text)
     heightList.push(el.offsetHeight)
   }
