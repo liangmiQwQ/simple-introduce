@@ -28,7 +28,6 @@ export function SvgExport() {
     a.href = url
     a.download = 'export.svg'
     a.click()
-    URL.revokeObjectURL(url)
   }
 
   return vine`
@@ -81,6 +80,7 @@ export function SvgExport() {
           max-h80
           overflow-x-auto
           whitespace-pre-line
+          class="op80 hover:op100 duration-300"
           >{{ svg }}</pre
         >
 

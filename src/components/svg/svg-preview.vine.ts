@@ -30,7 +30,6 @@ export function SvgPreview({ settings, height, width }: {
   return vine`
     <div :style>
       <img :src="svg" />
-      <!-- <img src="../../assets/blur.svg" /> -->
     </div>
   `
 }

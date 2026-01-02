@@ -72,6 +72,6 @@ export const getFadeSvg: getSvgFn = (settings: Settings, appearance?: SvgAppeara
 }
 
 export function asDataURL(string: string) {
-  const svgBlob = new Blob([string], { type: 'image/svg+xml;charset=utf-8' })
-  return URL.createObjectURL(svgBlob)
+  const b64 = btoa(encodeURIComponent(string).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode(Number.parseInt(p1, 16))))
+  return `data:image/svg+xml;base64,${b64}`
 }
