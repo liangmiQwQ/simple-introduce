@@ -2,7 +2,7 @@
 
 # Simple Introduce 🎬
 
-A modern web app for creating beautiful animated text introductions and exporting them as GIFs. Perfect for GitHub profiles, READMEs, and social media.
+A modern web app for creating beautiful animated text introductions and exporting them as GIFs or SVGs. Perfect for GitHub profiles, READMEs, and social media.
 
 <picture>
   <!-- Dark mode image -->
@@ -18,7 +18,7 @@ A modern web app for creating beautiful animated text introductions and exportin
 
 - **Animated Text Creation**: Create smooth text animations with fade or blur effects
 - **Real-time Preview**: See your animation live as you type
-- **GIF Export**: Export your animations as high-quality GIF files
+- **Export Formats**: Export your animations as high-quality GIF or lightweight SVG files
 - **Customizable Settings**: Adjust duration, font size, text alignment, and appearance
 - **Dark/Light Mode**: Toggle between themes for different export options
 - **Responsive Design**: Works perfectly on desktop and mobile devices
@@ -63,7 +63,7 @@ The built files will be in the `dist` directory.
 1. **Enter Your Text**: Type your introduction text, one line per animation frame
 2. **Customize Settings**: Adjust animation type, duration, font size, and alignment
 3. **Preview**: Watch your animation in real-time
-4. **Export**: Click "Export as GIF" and follow the export wizard
+4. **Export**: Click "Export" and choose between GIF or SVG formats
 5. **Download**: Your GIF will be automatically downloaded when ready
 
 ### Export Options
@@ -77,7 +77,7 @@ The built files will be in the `dist` directory.
 ✅ **Core Features Complete**:
 - Text animation creation
 - Real-time preview
-- GIF export functionality
+- GIF and SVG export functionality
 - Dark/light mode support
 - Responsive design
 - Customizable settings
