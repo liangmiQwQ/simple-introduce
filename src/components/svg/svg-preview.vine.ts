@@ -14,7 +14,8 @@ export function SvgPreview({ settings, height, width, appearance }: {
 
   return vine`
     <div :style>
-      <img src="../../assets/compile.svg" />
+      <!-- <img src="../../assets/fade.svg" /> -->
+      <img src="../../assets/blur.svg" />
     </div>
   `
 }
