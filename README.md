@@ -1,4 +1,4 @@
-![Simple Introduce](/docs/introduce.svg)
+<img src="./docs/introduce.svg" style="width: 100%;">
 
 # Simple Introduce 🎬
 
