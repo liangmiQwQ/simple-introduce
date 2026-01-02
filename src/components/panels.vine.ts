@@ -71,6 +71,14 @@ export function PanelPreview() {
         <div i-hugeicons-svg01 />
         Export as SVG
       </UiButton>
+
+      <div op15 text-xs text-right>
+        <p>Tip: GIF and SVG are using different rendering, exporting logic</p>
+        <p>The previewing, exporting result may be different</p>
+        <a href="https://github.com/liangmiQwQ/simple-introduce/issues/new" underline>
+          Issues welcome to report
+        </a>
+      </div>
     </div>
   `
 }

@@ -18,7 +18,8 @@ function getTextSpans(texts: string[]): string {
 
 function getStyleHeader(settings: Settings, appearance: SvgAppearance, width: number, height: number, background: boolean): string {
   return [
-    `*{font-family:${settings.fontFamily}`,
+    `*{font-family:${settings.fontFamily};`,
+    `text-align:${settings.textAlign};`,
     appearance === 'light' && `;color:#000`,
     appearance === 'light' && background && `;background:#fff`,
     appearance === 'dark' && `;color:#fff`,
