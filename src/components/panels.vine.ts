@@ -87,7 +87,7 @@ export function PanelSettings({ settings }: { settings: Settings }) {
   const textsValue = computed(() => settings.texts.join('\n'))
 
   return vine`
-    <UiCard class="op80 hover:op100 transition duration-100">
+    <UiCard class="op80 hover:op100 transition duration-200">
       <div flex="~ gap-6 md:row col lg:col">
         <!-- Animation Settings -->
         <div flex="~ col gap-4" class="w-full md:w-80 lg:w-full">

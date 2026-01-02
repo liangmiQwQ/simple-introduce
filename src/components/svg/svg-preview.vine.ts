@@ -1,10 +1,12 @@
 import type { StyleValue } from 'vue'
 import type { Settings } from '../../settings'
+import type { getSvgFn } from '@/composables/svg'
 import { useDark } from '@vueuse/core'
 import { computed } from 'vue'
-import { getBlurSvg } from '@/composables/svg-generator'
+import { getBlurSvg, getFadeSvg } from '@/composables/svg'
+import { asDataURL } from '../../composables/svg'
 
-export function SvgPreview({ settings, height, width, appearance }: {
+export function SvgPreview({ settings, height, width }: {
   settings: Settings
   height?: number
   width?: number
@@ -14,12 +16,21 @@ export function SvgPreview({ settings, height, width, appearance }: {
     width: `${width}px`,
   }))
 
-  console.log(getBlurSvg(settings, useDark().value ? 'dark' : 'light', width, height, false))
+  const isDark = useDark()
+
+  const svg = computed((): string => {
+    if (!height)
+      return ''
+
+    const fn: getSvgFn = settings.type === 'blur' ? getBlurSvg : getFadeSvg
+
+    return asDataURL(fn(settings, isDark.value ? 'dark' : 'light', width, height, false))
+  })
 
   return vine`
     <div :style>
-      <!-- <img src="../../assets/fade.svg" /> -->
-      <img src="../../assets/blur.svg" />
+      <img :src="svg" />
+      <!-- <img src="../../assets/blur.svg" /> -->
     </div>
   `
 }
