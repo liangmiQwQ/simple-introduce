@@ -1,4 +1,5 @@
 import { fileURLToPath } from 'node:url'
+import { DevTools } from '@vitejs/devtools'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
 import { VineVitePlugin } from 'vue-vine/vite'
@@ -11,6 +12,7 @@ export default defineConfig({
       },
     }),
     UnoCSS(),
+    DevTools(),
   ],
   resolve: {
     alias: {
@@ -19,5 +21,10 @@ export default defineConfig({
   },
   devtools: {
     enabled: true,
+  },
+  build: {
+    rolldownOptions: {
+      devtools: {},
+    },
   },
 })

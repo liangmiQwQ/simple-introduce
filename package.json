@@ -35,7 +35,7 @@
     "eslint": "^9.39.2",
     "npm-run-all": "^4.1.5",
     "typescript": "^5.9.3",
-    "unocss": "^66.5.12",
+    "unocss": "^66.6.7",
     "vite": "^8.0.0",
     "vue-vine": "^1.7.27",
     "vue-vine-tsc": "^1.7.27"
