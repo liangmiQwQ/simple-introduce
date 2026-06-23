@@ -27,4 +27,7 @@ export default defineConfig({
       devtools: {},
     },
   },
+  experimental: {
+    bundledDev: true,
+  },
 })
