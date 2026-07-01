@@ -9,20 +9,20 @@
     class="hidden sm:flex z-10"
   >
     <div op50>
-      Made with
+      Build with
     </div>
     <a
       class="op60 hover:op70"
       cursor-pointer
       font-bold
       flex="~ items-center gap-1"
-      href="https://vuejs.org/"
+      href="https://void.cloud/"
       target="_blank"
       rel="noreferrer"
     >
-      <div i-mdi-vuejs />
+      <div i-solar-cloud-bold-duotone />
       <div flex="~">
-        Vue
+        Void
       </div>
     </a>
   </div>

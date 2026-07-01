@@ -1,4 +1,4 @@
-<img src="./docs/introduce.svg" style="width: 100%;">
+<img src="./docs/introduce.svg" alt="Simple Introduce preview" style="width: 100%;">
 
 # Simple Introduce 🎬
 

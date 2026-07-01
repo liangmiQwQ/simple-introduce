@@ -9,8 +9,8 @@
     "dev": "vite",
     "build": "run-p type-check only-build",
     "preview": "vite preview",
-    "lint": "eslint src --cache",
-    "lint:fix": "eslint src --cache --fix",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --cache --fix",
     "type-check": "vue-tsc --noEmit",
     "only-build": "vite build"
   },
@@ -37,6 +37,7 @@
     "typescript": "^6.0.3",
     "unocss": "^66.7.4",
     "vite": "^8.1.2",
+    "void": "0.10.2",
     "vue-tsc": "^3.3.6"
   }
 }
