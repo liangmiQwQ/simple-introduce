@@ -1,18 +1,14 @@
 import { fileURLToPath } from 'node:url'
+import vue from '@vitejs/plugin-vue'
 import { DevTools } from '@vitejs/devtools'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
-import { VineVitePlugin } from 'vue-vine/vite'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [
-    VineVitePlugin({
-      vueCompilerOptions: {
-        __enableTransformBareAttrAsBool: false,
-      },
-    }),
+    vue(),
     UnoCSS(),
-    DevTools(),
+    command === 'serve' && DevTools(),
   ],
   resolve: {
     alias: {
@@ -20,7 +16,7 @@ export default defineConfig({
     },
   },
   devtools: {
-    enabled: true,
+    enabled: command === 'serve',
   },
   build: {
     rolldownOptions: {
@@ -30,4 +26,4 @@ export default defineConfig({
   experimental: {
     bundledDev: true,
   },
-})
+}))

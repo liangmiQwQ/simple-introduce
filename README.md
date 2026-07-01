@@ -96,7 +96,7 @@ Contributions are welcome! We'd love your contributions! Before submitting your 
 
 ## 🙏 Credits
 
-- Built with [Vue-Vine](https://github.com/vue-vine/vue-vine)
+- Built with [Vue](https://vuejs.org/)
 - Inspired by modern web animation tools
 - GIF recording based on [Slidev](https://github.com/slidevjs/slidev)'s screenshot implementation
 

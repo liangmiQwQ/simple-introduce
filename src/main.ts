@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
-import { App as VineApp } from './app.vine'
-import { router } from './router.vine'
+import App from './App.vue'
+import { router } from './router'
 import './styles'
 
-const app = createApp(VineApp)
+const app = createApp(App)
 app.use(router)
 app.mount('#app')
