@@ -8,18 +8,16 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ]
     },
     "resolveJsonModule": true,
     "types": [
-      "vite/client",
-      "vue-vine/macros"
+      "vite/client"
     ],
     "allowJs": true,
     "strict": true,
