@@ -8,9 +8,6 @@ export interface Settings {
   textAlign: 'left' | 'center' | 'right'
   texts: string[]
   export: {
-    gif: {
-      appearance: 'dark' | 'light' | 'both'
-    }
     svg: {
       appearance: SvgAppearance
       background: boolean
@@ -35,9 +32,6 @@ export const DEFAULT_SETTINGS: Settings = {
     '✨ Simple, clean, and actually cool',
   ],
   export: {
-    gif: {
-      appearance: 'both',
-    },
     svg: {
       appearance: 'auto',
       background: false,

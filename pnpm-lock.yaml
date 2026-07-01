@@ -11,9 +11,6 @@ importers:
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.3.0(vue@3.5.39(typescript@6.0.3))
-      gif.js:
-        specifier: ^0.2.0
-        version: 0.2.0
       motion-v:
         specifier: ^2.3.0
         version: 2.3.0(@vueuse/core@14.3.0(vue@3.5.39(typescript@6.0.3)))(vue@3.5.39(typescript@6.0.3))
@@ -42,9 +39,6 @@ importers:
       '@iconify-json/svg-spinners':
         specifier: ^1.2.4
         version: 1.2.4
-      '@types/gif.js':
-        specifier: ^0.2.5
-        version: 0.2.5
       '@types/node':
         specifier: ^26.0.1
         version: 26.0.1
@@ -1614,12 +1608,6 @@ packages:
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
-  '@types/events@3.0.3':
-    resolution: {integrity: sha512-trOc4AAUThEz9hapPtSd7wf5tiQKvTtu5b371UxXdTuqzIh0ArcRspRP0i0Viu+LXstIQ1z96t1nsPxT9ol01g==}
-
-  '@types/gif.js@0.2.5':
-    resolution: {integrity: sha512-OdDQYh9v7td9ztjaooBSqjUBAyAuui2xwDDmQcyRLd6c9T0iWgkebAoCBEdEEBoZG3ekJE/6UnH63Dzq0S3bvw==}
-
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
@@ -2836,9 +2824,6 @@ packages:
 
   get-tsconfig@4.14.0:
     resolution: {integrity: sha512-yTb+8DXzDREzgvYmh6s9vHsSVCHeC0G3PI5bEXNBHtmshPnO+S5O7qgLEOn0I5QvMy6kpZN8K1NKGyilLb93wA==}
-
-  gif.js@0.2.0:
-    resolution: {integrity: sha512-bYxCoT8OZKmbxY8RN4qDiYuj4nrQDTzgLRcFVovyona1PTWNePzI4nzOmotnlOFIzTk/ZxAHtv+TfVLiBWj/hw==}
 
   github-from-package@0.0.0:
     resolution: {integrity: sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==}
@@ -5550,12 +5535,6 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
-  '@types/events@3.0.3': {}
-
-  '@types/gif.js@0.2.5':
-    dependencies:
-      '@types/events': 3.0.3
-
   '@types/hast@3.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -7051,8 +7030,6 @@ snapshots:
   get-tsconfig@4.14.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
-
-  gif.js@0.2.0: {}
 
   github-from-package@0.0.0: {}
 

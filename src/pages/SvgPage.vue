@@ -19,6 +19,6 @@ const { exporting, cancelExport, startExport } = useExport()
       <PanelSettings v-model:settings="settings" />
     </div>
 
-    <PanelPreview v-model:settings="settings" mode="svg" @export="startExport" />
+    <PanelPreview v-model:settings="settings" @export="startExport" />
   </div>
 </template>

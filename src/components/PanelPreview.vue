@@ -1,15 +1,10 @@
 <script setup lang="ts">
 import type { Settings } from '@/settings'
 import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue'
-import GifPreview from '@/components/gif/GifPreview.vue'
 import SvgPreview from '@/components/svg/SvgPreview.vue'
 import UiButton from '@/ui/UiButton.vue'
 import UiCard from '@/ui/UiCard.vue'
 import { getAspect, getHeight } from '@/utils'
-
-const props = defineProps<{
-  mode: 'svg' | 'gif'
-}>()
 
 const emit = defineEmits<{
   export: []
@@ -54,8 +49,7 @@ watch([width, height], ([nextWidth, nextHeight]) => {
   <div flex-1 h-fit flex="~ col gap-2">
     <UiCard w-full class="!py-0">
       <div ref="cardPreview" w-full>
-        <GifPreview v-if="props.mode === 'gif'" :height="height" :settings="settings" />
-        <SvgPreview v-else-if="props.mode === 'svg'" :height="height" :settings="settings" />
+        <SvgPreview :height="height" :settings="settings" />
       </div>
       <div p-2 text-sm flex="~ items-center gap-4 justify-center" op60 w-full>
         <div flex="~ items-center gap-1">
@@ -68,18 +62,12 @@ watch([width, height], ([nextWidth, nextHeight]) => {
         </div>
       </div>
     </UiCard>
-    <UiButton v-if="props.mode === 'gif'" type="secondary" @click="emit('export')">
-      <div i-hugeicons-gif01 />
-      Export as GIF
-    </UiButton>
-    <UiButton v-else-if="props.mode === 'svg'" type="secondary" @click="emit('export')">
+    <UiButton type="secondary" @click="emit('export')">
       <div i-hugeicons-svg01 />
       Export as SVG
     </UiButton>
 
     <div op15 text-xs text-right>
-      <p>Tip: GIF and SVG are using different rendering, exporting logic</p>
-      <p>The previewing, exporting result may be different</p>
       <a href="https://github.com/liangmiQwQ/simple-introduce/issues/new" underline>
         Issues welcome to report
       </a>

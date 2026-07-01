@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@vueuse/core": "^14.3.0",
-    "gif.js": "^0.2.0",
     "motion-v": "^2.3.0",
     "vue": "^3.5.39",
     "vue-router": "^5.1.0"
@@ -28,7 +27,6 @@
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/solar": "^1.2.5",
     "@iconify-json/svg-spinners": "^1.2.4",
-    "@types/gif.js": "^0.2.5",
     "@types/node": "^26.0.1",
     "@vitejs/devtools": "^0.3.3",
     "@vitejs/plugin-vue": "^6.0.7",
