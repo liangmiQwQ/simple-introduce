@@ -1,12 +1,11 @@
-name: Deploy
+name: CI
 
 on:
   push:
-    branches: [main]
-  workflow_dispatch:
+  pull_request:
 
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,7 +18,5 @@ jobs:
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile
-      - run: pnpm void deploy
-        env:
-          VOID_TOKEN: ${{ secrets.VOID_TOKEN }}
-          VOID_PROJECT: ${{ secrets.VOID_PROJECT }}
+      - run: pnpm run lint
+      - run: pnpm run build

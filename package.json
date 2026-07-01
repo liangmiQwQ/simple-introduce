@@ -9,8 +9,8 @@
     "dev": "vite",
     "build": "run-p type-check only-build",
     "preview": "vite preview",
-    "lint": "eslint src --cache",
-    "lint:fix": "eslint src --cache --fix",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --cache --fix",
     "type-check": "vue-tsc --noEmit",
     "only-build": "vite build"
   },
