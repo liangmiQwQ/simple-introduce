@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/void/schema.json",
+  "inference": {
+    "appType": "spa",
+    "outputDir": "dist",
+    "build": "pnpm run build"
+  },
+  "worker": {
+    "compatibility_date": "2026-02-24"
+  }
+}
