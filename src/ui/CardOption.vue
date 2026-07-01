@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { StyleValue } from 'vue'
 import { computed } from 'vue'
 

@@ -1,4 +1,4 @@
-<template>
+<template vapor>
   <div
     flex="~ items-center gap-2"
     select-none

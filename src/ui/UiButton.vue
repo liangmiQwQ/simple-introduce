@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import { computed } from 'vue'
 
 type ButtonType = 'default' | 'destructive' | 'secondary' | 'ghost'

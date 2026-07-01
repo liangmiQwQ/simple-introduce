@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { Settings } from '@/settings'
 import { useLocalStorage } from '@vueuse/core'
 import PanelPreview from '@/components/PanelPreview.vue'

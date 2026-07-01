@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
 import UiButton from '@/ui/UiButton.vue'
 

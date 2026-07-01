@@ -1,8 +1,9 @@
-import { createApp } from 'vue'
+import { createVaporApp, vaporInteropPlugin } from 'vue'
 import App from './App.vue'
 import { router } from './router'
 import './styles'
 
-const app = createApp(App)
+const app = createVaporApp(App)
+app.use(vaporInteropPlugin)
 app.use(router)
 app.mount('#app')

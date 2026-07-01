@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { Settings } from '@/settings'
 import { computed, onMounted, onUnmounted, ref, useTemplateRef, watch } from 'vue'
 import SvgPreview from '@/components/svg/SvgPreview.vue'

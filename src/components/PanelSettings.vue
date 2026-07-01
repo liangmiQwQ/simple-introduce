@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { Settings } from '@/settings'
 import { computed } from 'vue'
 import { DEFAULT_SETTINGS } from '@/settings'

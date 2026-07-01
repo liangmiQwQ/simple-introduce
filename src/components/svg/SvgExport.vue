@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup vapor lang="ts">
 import type { getSvgFn } from '@/composables/svg'
 import type { Settings } from '@/settings'
 import { useClipboard } from '@vueuse/core'
